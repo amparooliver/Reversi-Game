@@ -790,17 +790,8 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="xpad">5</property>
-                    <property name="ypad">20</property>
-                    <property name="label" translatable="yes">Amparo		10		7		3
-Nico    		3   		2   		1
-Amanda  	20  		20  		0
-Gonzalo 		15  		10  		5
-Ansdrea 		5 	 	4   		1
-Matias  		9   		1   		8
-Pepe    		12  		6   		6
-Cami    		7   		7   		0
-Maria   		22  		11  		11
-Rosa    		2   		1   		1</property>
+                    <property name="ypad">10</property>
+                    <property name="label" translatable="yes">RESULTADOS</property>
                     <property name="justify">center</property>
                     <attributes>
                       <attribute name="font-desc" value="Ubuntu Condensed, Bold 12"/>

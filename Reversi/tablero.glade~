@@ -736,14 +736,15 @@
       <placeholder/>
     </child>
     <child>
-      <object class="GtkBox" id="box_est1">
+      <object class="GtkBox" id="box_estadisticas">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkImage" id="imagen_bordetemp3">
+          <object class="GtkImage" id="imagen_titulo_estadistica">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="pixbuf">IMG/borde2.jpg</property>
+            <property name="pixbuf">IMG/titulo_estadisticas.JPG</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -752,15 +753,14 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="box_est2">
+          <object class="GtkBox" id="box2_estadisticas">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkImage" id="imagen_bordetemp">
+              <object class="GtkImage" id="imagen_lateral_est">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="pixbuf">IMG/borde_inferior2.jpg</property>
+                <property name="pixbuf">IMG/borde_est.JPG</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -769,26 +769,41 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label_estadisticas">
+              <object class="GtkBox" id="box3_estadisticas">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xpad">5</property>
-                <property name="ypad">12</property>
-                <property name="label" translatable="yes">Amparo  10  7   3
-Nico    3   2   1
-Amanda  20  20  0
-Gonzalo 15  10  5
-Ansdrea 5  4   1
-Matias  9   1   8
-Pepe    12  6   6
-Cami    7   7   0
-Maria   22  11  11
-Rosa    2   1   1</property>
-                <property name="wrap">True</property>
-                <attributes>
-                  <attribute name="font-desc" value="Ubuntu Condensed, Bold 12"/>
-                  <attribute name="foreground" value="#292964644848"/>
-                </attributes>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkImage" id="imagen_titulo2_est">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">IMG/titulo2_est.JPG</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label_estadisticas">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xpad">5</property>
+                    <property name="ypad">18</property>
+                    <property name="label" translatable="yes">RESULTADOS</property>
+                    <property name="justify">center</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Ubuntu Condensed, Bold 12"/>
+                      <attribute name="foreground" value="#1c1c5c5c4545"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -797,10 +812,10 @@ Rosa    2   1   1</property>
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="imagen_bordetemp2">
+              <object class="GtkImage" id="imagen_lateral2_est">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="pixbuf">IMG/borde_inferior2.jpg</property>
+                <property name="pixbuf">IMG/borde_est1.JPG</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -816,10 +831,10 @@ Rosa    2   1   1</property>
           </packing>
         </child>
         <child>
-          <object class="GtkImage" id="imagen_bordetemp5">
+          <object class="GtkImage" id="imagen_abajo_estadisticas ">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="pixbuf">IMG/borde2.jpg</property>
+            <property name="pixbuf">IMG/abajo_est.jpg</property>
           </object>
           <packing>
             <property name="expand">False</property>

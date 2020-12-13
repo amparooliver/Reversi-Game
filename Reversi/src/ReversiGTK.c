@@ -52,7 +52,9 @@ static void menu_cerrar(GtkWidget *widget, gpointer data){
 }
 
 static void menu_estadisticas(GtkWidget *widget, gpointer data){
+	impresion_estadisticas();
 	gtk_widget_show_now(GTK_WIDGET(ventana_estadisticas));
+
 
 }
 
