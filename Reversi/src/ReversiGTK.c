@@ -38,7 +38,7 @@ GtkButton *boton_salir_empataron;
 GtkButton *boton_jugar_empataron;
 
 static void mostrar_ayuda(GtkWidget *widget, gpointer data){
-	gtk_widget_show_now(GTK_WIDGET(dialogAyuda));
+	gtk_widget_show(GTK_WIDGET(dialogAyuda));
 	//gtk_widget_hide(GTK_WIDGET(dialogAyuda));
 }
 
@@ -53,7 +53,7 @@ static void menu_cerrar(GtkWidget *widget, gpointer data){
 
 static void menu_estadisticas(GtkWidget *widget, gpointer data){
 	impresion_estadisticas();
-	gtk_widget_show_now(GTK_WIDGET(ventana_estadisticas));
+	gtk_widget_show(GTK_WIDGET(ventana_estadisticas));
 
 
 }

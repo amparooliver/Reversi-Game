@@ -31,12 +31,13 @@ const gchar *rival;
 
 //VARIABLES
 int color, computadora, jugador, turno, i, j;
+int gano;
 //char usuario[20];
 //int f,c;
 char buffer;
 char tablero_c[9][9];
 struct statistics{
-  char nombre[20];
+  char nombre_estadisticas[20];
   int parJugadas;
   int parGanadas;
   int parPerdidas;
@@ -63,4 +64,5 @@ void jugar();
 int impresion_estadisticas();
 void ordenar(int nroPalabras, struct statistics *ptr);
 void impresion_estadisticas_enGTK(struct statistics *ptr);
+int actualizacion_estadisticas();
 
