@@ -86,26 +86,111 @@ int impresion_estadisticas(){
 		}
 
 		//impresion en gtk
-		impresion_estadisticas_enGTK(ptr);
+		impresion_estadisticas_enGTK(ptr,nroPalabras);
 
 		fclose(infile);
 
 		return 0;
 }
-void impresion_estadisticas_enGTK(struct statistics *ptr){
-		gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
-		(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
-		(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
-		(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas,
-		(ptr + 3)->nombre_estadisticas,(ptr + 3)->parJugadas,((ptr + 3)->parGanadas),(ptr + 3)->parPerdidas,
-		(ptr + 4)->nombre_estadisticas,(ptr + 4)->parJugadas,((ptr + 4)->parGanadas),(ptr + 4)->parPerdidas,
-		(ptr + 5)->nombre_estadisticas,(ptr + 5)->parJugadas,((ptr + 5)->parGanadas),(ptr + 5)->parPerdidas,
-		(ptr + 6)->nombre_estadisticas,(ptr + 6)->parJugadas,((ptr + 6)->parGanadas),(ptr + 6)->parPerdidas,
-		(ptr + 7)->nombre_estadisticas,(ptr + 7)->parJugadas,((ptr + 7)->parGanadas),(ptr + 7)->parPerdidas,
-		(ptr + 8)->nombre_estadisticas,(ptr + 8)->parJugadas,((ptr + 8)->parGanadas),(ptr + 8)->parPerdidas,
-		(ptr + 9)->nombre_estadisticas,(ptr + 9)->parJugadas,((ptr + 9)->parGanadas),(ptr + 9)->parPerdidas);
-		gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
-		g_free(estadisticas);
+void impresion_estadisticas_enGTK(struct statistics *ptr, int nroPalabras){
+
+		if(nroPalabras==1){
+			gchar *estadisticas = g_strdup_printf("%s\t%d\t%d\t%d\n", (ptr)->nombre_estadisticas,(ptr)->parJugadas,((ptr)->parGanadas),(ptr)->parPerdidas);
+			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
+			g_free(estadisticas);
+		}else if(nroPalabras==2){
+			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
+			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas);
+			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
+			g_free(estadisticas);
+		}else if(nroPalabras==3){
+			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
+			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
+			(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas);
+			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
+			g_free(estadisticas);
+		}else if(nroPalabras==4){
+			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
+			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
+			(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas,
+			(ptr + 3)->nombre_estadisticas,(ptr + 3)->parJugadas,((ptr + 3)->parGanadas),(ptr + 3)->parPerdidas);
+			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
+			g_free(estadisticas);
+		}else if(nroPalabras==5){
+			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
+			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
+			(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas,
+			(ptr + 3)->nombre_estadisticas,(ptr + 3)->parJugadas,((ptr + 3)->parGanadas),(ptr + 3)->parPerdidas,
+			(ptr + 4)->nombre_estadisticas,(ptr + 4)->parJugadas,((ptr + 4)->parGanadas),(ptr + 4)->parPerdidas);
+			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
+			g_free(estadisticas);
+		}else if(nroPalabras==6){
+			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
+			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
+			(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas,
+			(ptr + 3)->nombre_estadisticas,(ptr + 3)->parJugadas,((ptr + 3)->parGanadas),(ptr + 3)->parPerdidas,
+			(ptr + 4)->nombre_estadisticas,(ptr + 4)->parJugadas,((ptr + 4)->parGanadas),(ptr + 4)->parPerdidas,
+			(ptr + 5)->nombre_estadisticas,(ptr + 5)->parJugadas,((ptr + 5)->parGanadas),(ptr + 5)->parPerdidas);
+			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
+			g_free(estadisticas);
+		}else if(nroPalabras==7){
+			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
+			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
+			(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas,
+			(ptr + 3)->nombre_estadisticas,(ptr + 3)->parJugadas,((ptr + 3)->parGanadas),(ptr + 3)->parPerdidas,
+			(ptr + 4)->nombre_estadisticas,(ptr + 4)->parJugadas,((ptr + 4)->parGanadas),(ptr + 4)->parPerdidas,
+			(ptr + 5)->nombre_estadisticas,(ptr + 5)->parJugadas,((ptr + 5)->parGanadas),(ptr + 5)->parPerdidas,
+			(ptr + 6)->nombre_estadisticas,(ptr + 6)->parJugadas,((ptr + 6)->parGanadas),(ptr + 6)->parPerdidas);
+			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
+			g_free(estadisticas);
+		}else if(nroPalabras==8){
+			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
+			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
+			(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas,
+			(ptr + 3)->nombre_estadisticas,(ptr + 3)->parJugadas,((ptr + 3)->parGanadas),(ptr + 3)->parPerdidas,
+			(ptr + 4)->nombre_estadisticas,(ptr + 4)->parJugadas,((ptr + 4)->parGanadas),(ptr + 4)->parPerdidas,
+			(ptr + 5)->nombre_estadisticas,(ptr + 5)->parJugadas,((ptr + 5)->parGanadas),(ptr + 5)->parPerdidas,
+			(ptr + 6)->nombre_estadisticas,(ptr + 6)->parJugadas,((ptr + 6)->parGanadas),(ptr + 6)->parPerdidas,
+			(ptr + 7)->nombre_estadisticas,(ptr + 7)->parJugadas,((ptr + 7)->parGanadas),(ptr + 7)->parPerdidas);
+			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
+			g_free(estadisticas);
+		}else if(nroPalabras==9){
+			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
+			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
+			(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas,
+			(ptr + 3)->nombre_estadisticas,(ptr + 3)->parJugadas,((ptr + 3)->parGanadas),(ptr + 3)->parPerdidas,
+			(ptr + 4)->nombre_estadisticas,(ptr + 4)->parJugadas,((ptr + 4)->parGanadas),(ptr + 4)->parPerdidas,
+			(ptr + 5)->nombre_estadisticas,(ptr + 5)->parJugadas,((ptr + 5)->parGanadas),(ptr + 5)->parPerdidas,
+			(ptr + 6)->nombre_estadisticas,(ptr + 6)->parJugadas,((ptr + 6)->parGanadas),(ptr + 6)->parPerdidas,
+			(ptr + 7)->nombre_estadisticas,(ptr + 7)->parJugadas,((ptr + 7)->parGanadas),(ptr + 7)->parPerdidas,
+			(ptr + 8)->nombre_estadisticas,(ptr + 8)->parJugadas,((ptr + 8)->parGanadas),(ptr + 8)->parPerdidas);
+			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
+			g_free(estadisticas);
+		}
+		else{
+			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
+			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
+			(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas,
+			(ptr + 3)->nombre_estadisticas,(ptr + 3)->parJugadas,((ptr + 3)->parGanadas),(ptr + 3)->parPerdidas,
+			(ptr + 4)->nombre_estadisticas,(ptr + 4)->parJugadas,((ptr + 4)->parGanadas),(ptr + 4)->parPerdidas,
+			(ptr + 5)->nombre_estadisticas,(ptr + 5)->parJugadas,((ptr + 5)->parGanadas),(ptr + 5)->parPerdidas,
+			(ptr + 6)->nombre_estadisticas,(ptr + 6)->parJugadas,((ptr + 6)->parGanadas),(ptr + 6)->parPerdidas,
+			(ptr + 7)->nombre_estadisticas,(ptr + 7)->parJugadas,((ptr + 7)->parGanadas),(ptr + 7)->parPerdidas,
+			(ptr + 8)->nombre_estadisticas,(ptr + 8)->parJugadas,((ptr + 8)->parGanadas),(ptr + 8)->parPerdidas,
+			(ptr + 9)->nombre_estadisticas,(ptr + 9)->parJugadas,((ptr + 9)->parGanadas),(ptr + 9)->parPerdidas);
+			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
+			g_free(estadisticas);
+		}
+
 
 }
 int actualizacion_estadisticas(){
@@ -119,8 +204,8 @@ int actualizacion_estadisticas(){
 	char aux2[20];
 	char aux3[20];
 
-	//ABRIMOS EL ARCHIVO PARA LEER Y ESCRIBIR
-	infile = fopen(inname, "r+");
+	//ABRIMOS EL ARCHIVO PARA ESCRIBIR
+	infile = fopen(inname, "r");
 	if (!infile) {
 		printf("Couldn't open %s for reading and writing\n",inname);
 		return 0;
@@ -143,6 +228,20 @@ int actualizacion_estadisticas(){
     }
 
 	nroPalabras= i;
+
+	fclose(infile);
+
+	infile = fopen(inname, "w+");
+	if (!infile) {
+		printf("Couldn't open %s for reading and writing\n",inname);
+		return 0;
+	}
+
+	printf("\nNRO DE PALABRAS: %d",nroPalabras);
+	for (i = 0; i < nroPalabras; ++i){
+		printf("%s\t%d\t%d\t%d\n", (ptr + i)->nombre_estadisticas,(ptr + i)->parJugadas,((ptr + i)->parGanadas),(ptr + i)->parPerdidas);
+	}
+
 	for(i=0; i<nroPalabras-1; i++) {
 		if(strcmp(((ptr+i)->nombre_estadisticas),nombre)==0){
 
@@ -245,10 +344,14 @@ int actualizacion_estadisticas(){
 		}
 
 	}
-
-	//Impresion sin ordenar en consola
+	printf("\nNRO DE PALABRAS: %d",nroPalabras);
 	for (i = 0; i < nroPalabras; ++i){
-    	printf("%s\t%d\t%d\t%d\n", (ptr + i)->nombre_estadisticas,(ptr + i)->parJugadas,((ptr + i)->parGanadas),(ptr + i)->parPerdidas);
+		printf("%s\t%d\t%d\t%d\n", (ptr + i)->nombre_estadisticas,(ptr + i)->parJugadas,((ptr + i)->parGanadas),(ptr + i)->parPerdidas);
+	}
+
+	//
+	for (i = 0; i < nroPalabras; ++i){
+    	fprintf(infile,"%s\t%d\t%d\t%d\n",(ptr + i)->nombre_estadisticas,(ptr + i)->parJugadas,((ptr + i)->parGanadas),(ptr + i)->parPerdidas);
 	}
 
 	fclose(infile);
