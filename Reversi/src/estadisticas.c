@@ -112,7 +112,7 @@ int actualizacion_estadisticas(){
 	printf("\n Entra en actualizaciion estad");
 	char line[100];
 	struct statistics *ptr;
-	int i=0, nroPalabras;
+	int i=0, nroPalabras,existeJugador=0,existeRival=0;
 	FILE *infile;
 	char *inname = "./src/estadisticas.txt";
 	char aux[20];
@@ -143,22 +143,107 @@ int actualizacion_estadisticas(){
     }
 
 	nroPalabras= i;
-
 	for(i=0; i<nroPalabras-1; i++) {
 		if(strcmp(((ptr+i)->nombre_estadisticas),nombre)==0){
-			printf("\nEncuentra el nombre Y LE SUMA A PARTIDA JUGADA");
+
+			//Variable bandera si existe el jugador en el archivo
+			existeJugador=1;
+
+			//ENCUENTRA EL NOMBRE E INCREMENTA
 			((ptr + i)->parJugadas)=((ptr + i)->parJugadas+1);
 			printf("%d jugadas \n", (ptr+i)->parJugadas);
-			   if(gano==1){
-				   ((ptr + i)->parGanadas)++;
-				   printf("%d ganadas \n", (ptr+i)->parGanadas);
-			   }else if(gano==0){
-				   ((ptr + i)->parPerdidas)++;
-				   printf("%d perdidas \n", (ptr+i)->parPerdidas);
-			   }else if(gano==2){
-				   //empato, no aumenta
-			   }
-		   }
+
+			//GANA USUARIO
+			if(gano==1){
+				((ptr + i)->parGanadas)++;
+				printf("%d ganadas \n", (ptr+i)->parGanadas);
+
+			//GANA COMPUTADORA
+			}else if(gano==0){
+				((ptr + i)->parPerdidas)++;
+				printf("%d perdidas \n", (ptr+i)->parPerdidas);
+
+			//EMPATARON
+			}else if(gano==2){
+				   //no aumenta nada
+			}
+		}else if(strcmp(((ptr+i)->nombre_estadisticas),rival)==0){
+			//Variable bandera si existe el rival en el archivo
+			existeRival=1;
+
+			//ENCUENTRA EL NOMBRE E INCREMENTA
+			((ptr + i)->parJugadas)=((ptr + i)->parJugadas+1);
+			printf("%d jugadas \n", (ptr+i)->parJugadas);
+
+			//PIERDE COMPUTADORA
+			if(gano==1){
+				((ptr + i)->parPerdidas)++;
+				printf("%d perdidas \n", (ptr+i)->parPerdidas);
+
+			//GANA COMPUTADORA
+			}else if(gano==0){
+				((ptr + i)->parGanadas)++;
+				printf("%d ganadas \n", (ptr+i)->parGanadas);
+
+			//EMPATARON
+			}else if(gano==2){
+				   //no aumenta nada
+			}
+		}
+	}
+
+	//si es que no existe ese nombre de JUGADOR en estadisticas, agrega al struct
+	if(existeJugador==0){
+		//incremento el nroPalabras para el struct
+		nroPalabras++;
+
+		//incrementamos el espacio de memoria de la estructura
+		ptr = (struct statistics *)realloc(ptr,sizeof(struct statistics)*(nroPalabras+1));
+
+		i = nroPalabras - 1; //apunta a la ult posicion en el struct
+		strcpy(((ptr + i)->nombre_estadisticas),nombre); //agrega el nombre al struct
+		((ptr + i)->parJugadas)= 1 ;  // agrega Partidas jugadas = 1
+		//GANA USUARIO
+		if(gano==1){
+			((ptr + i)->parGanadas)= 1 ; // agrega Partidas Ganadas = 1
+			((ptr + i)->parPerdidas)= 0 ;
+		//GANA COMPUTADORA
+		}else if(gano==0){
+			((ptr + i)->parPerdidas)= 1 ; // agrega Partidas Perdidas = 1
+			((ptr + i)->parGanadas)= 0 ;
+		//EMPATARON
+		}else if(gano==2){
+			((ptr + i)->parGanadas)= 0 ;
+			((ptr + i)->parPerdidas)= 0 ;
+		}
+
+
+	}
+
+	//si es que no existe ese nombre de RIVAL en estadisticas, agrega al struct
+	if(existeRival==0){
+		//incremento el nroPalabras para el struct
+		nroPalabras++;
+
+		//incrementamos el espacio de memoria de la estructura
+		ptr = (struct statistics *)realloc(ptr,sizeof(struct statistics)*(nroPalabras+1));
+		i = nroPalabras-1;
+		strcpy(((ptr + i)->nombre_estadisticas),rival); //agrega el rival al struct
+		((ptr + i)->parJugadas)= 1 ;  // agrega Partidas jugadas = 1
+		//GANA USUARIO
+		if(gano==1){
+			((ptr + i)->parPerdidas)= 1 ; // agrega Partidas Perdidas = 1
+			((ptr + i)->parGanadas)= 0 ;
+		//GANA COMPUTADORA
+		}else if(gano==0){
+			((ptr + i)->parGanadas)= 1 ; // agrega Partidas Ganadas = 1
+			((ptr + i)->parPerdidas)= 0 ;
+		//EMPATARON
+		}else if(gano==2){
+			((ptr + i)->parGanadas)= 0 ;
+			((ptr + i)->parPerdidas)= 0 ;
+		}
+
 	}
 
 	//Impresion sin ordenar en consola

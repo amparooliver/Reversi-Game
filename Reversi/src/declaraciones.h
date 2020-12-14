@@ -32,6 +32,7 @@ const gchar *rival;
 //VARIABLES
 int color, computadora, jugador, turno, i, j;
 int gano;
+int gano2;
 //char usuario[20];
 //int f,c;
 char buffer;
