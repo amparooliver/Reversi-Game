@@ -64,6 +64,6 @@ void remplaza_imagenes(int i, int j, int col);
 void jugar();
 int impresion_estadisticas();
 void ordenar(int nroPalabras, struct statistics *ptr);
-void impresion_estadisticas_enGTK(struct statistics *ptr);
+void impresion_estadisticas_enGTK(struct statistics *ptr,int nroPalabras);
 int actualizacion_estadisticas();
 
