@@ -1,10 +1,3 @@
-/*
- * Inteligencia.c
- *
- *  Created on: 11 dic. 2020
- *      Author: lp1-2019
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -22,11 +15,12 @@ int j_aux=0;
 
 int turno_computadora(){
 	int i,j,x,y;
-	printf("\nEntra en turno compu");
+
 	gchar *turno_de = g_strdup_printf("Turno de: %s", nombre);
 	gtk_label_set_text(GTK_LABEL(label_turno), turno_de);
 	g_free(turno_de);
 	srand(time(NULL));
+
 	if(pierde_turno(computadora)==FALSE){
 		for(x=0;x<9;x++){
 			for(y=0;y<9;y++){
@@ -35,10 +29,12 @@ int turno_computadora(){
 				inteligencia_compu(i,j,computadora);
 			}
 		}
+
 		verifica_validez1(i_aux,j_aux,computadora);
 		insertar_ficha(i_aux,j_aux,computadora);
 		remplaza_imagenes(i_aux,j_aux,computadora);
 		mayor=0;
+
 		gchar *temp = g_strdup_printf("Tu rival %s ha insertado una ficha en [%c,%d]", rival,('A'+ i_aux-1) ,j_aux);
 		gtk_label_set_text(GTK_LABEL(label_estado), temp);
 		g_free(temp);
@@ -55,11 +51,11 @@ return 0;
 
 void inteligencia_compu(int i, int j,int col){
 	int k, x;
-	int aux_compu=0;
-	int encerrados;
-	//Para determinar ficha del que tiene el turno y su contrincante
+	int aux_compu=0; //Contador de cuantos ENEMY puede encerrar en total
+	int encerrados; //Contador de cuantos ENEMY puede encerrar de forma horizontal/vertical/diagonal
 	char enemy,player;
-	printf("\nEntra inteligencia compu");
+
+	//Para determinar ficha del que tiene el turno y su contrincante
 	if(col==1){
 		player='B';
 		enemy='N';
@@ -67,18 +63,19 @@ void inteligencia_compu(int i, int j,int col){
 		player='N';
 		enemy='B';
 	}
-	//si no selecciono una coordenada donde hay letras o numeros
+
+	//Si es una casilla distinta de letras o numeros del tablero
 	if(i!=0 && j!=0){
-	//Si selecciono un espacio vacio
+	//Si es una casilla vacia
 		if(tablero_c[i][j]==' '){
-			//Para arriba
-			if(tablero_c[i-1][j]==enemy){//Posibilidad de jugar por verificar arriba arriba
+			//Si puede comer HACIA ARRIBA
+			if(tablero_c[i-1][j]==enemy){
 				k=i-1;
 				encerrados=0;
-				while (tablero_c[k][j]==enemy && k>0){ //Si hay enemigo recorre hasta que haya un player o un espacio
+				while (tablero_c[k][j]==enemy && k>0){ //Si hay un ENEMY recorre hasta que haya un PLAYER o una casilla VACIA
 					k--;
 					encerrados++;
-					if (tablero_c[k][j]==player){ //Si hay player, jugada valida
+					if (tablero_c[k][j]==player){ //Si hay PLAYER --> jugada valida
 						for (x=0; x<encerrados; x++){
 							aux_compu++;
 						}
@@ -86,8 +83,8 @@ void inteligencia_compu(int i, int j,int col){
 				}
 			}
 
-			//Para abajo
-			if(tablero_c[i+1][j]==enemy){ //Posibilidad de jugar por verificar hacia abajo
+			//Si puede comer HACIA ABAJO
+			if(tablero_c[i+1][j]==enemy){
 				k=i+1;
 				encerrados=0;
 				while (tablero_c[k][j]==enemy && k<9){
@@ -102,8 +99,8 @@ void inteligencia_compu(int i, int j,int col){
 				}
 			}
 
-			//Para la derecha
-			if(tablero_c[i][j+1]==enemy){ //Posibilidad de jugar por verificar la derecha
+			//Si puede comer HACIA LA DERECHA
+			if(tablero_c[i][j+1]==enemy){
 				k=j+1;
 				encerrados=0;
 				while (tablero_c[i][k]==enemy && k<9){
@@ -117,8 +114,8 @@ void inteligencia_compu(int i, int j,int col){
 				}
 			}
 
-			//Para la izquierda
-			if(tablero_c[i][j-1]==enemy){ //Posibilidad de jugar por verificar la izquierda
+			//Si puede comer HACIA LA IZQUIERDA
+			if(tablero_c[i][j-1]==enemy){
 				k=j-1;
 				encerrados=0;
 				while (tablero_c[i][k]==enemy && k>0){
@@ -132,8 +129,8 @@ void inteligencia_compu(int i, int j,int col){
 				}
 			}
 
-			//Para diagonal derecha arriba
-			if(tablero_c[i-1][j+1]==enemy){ //Posibilidad de jugar por verificar diagonal derecha arriba
+			//Si puede comer en DIAGONAL DERECHA ARRIBA
+			if(tablero_c[i-1][j+1]==enemy){
 				int z;
 				k=i-1;
 				z=j+1;
@@ -150,8 +147,8 @@ void inteligencia_compu(int i, int j,int col){
 				}
 			}
 
-			//Para diagonal izquierda arriba
-			if(tablero_c[i-1][j-1]==enemy){ //Posibilidad de jugar por verificar diagonal izquierda arriba
+			//Si puede comer en DIAGONAL IZQUIERDA ARRIBA
+			if(tablero_c[i-1][j-1]==enemy){
 				int z;
 				k=i-1;
 				z=j-1;
@@ -168,8 +165,8 @@ void inteligencia_compu(int i, int j,int col){
 				}
 			}
 
-			//Para diagonal izquierda abajo
-			if(tablero_c[i+1][j-1]==enemy){ //Posibilidad de jugar por verificar diagonal izquierda abajo
+			//Si puede comer en DIAGONAL IZQUIERDA ABAJO
+			if(tablero_c[i+1][j-1]==enemy){
 				int z;
 				k=i+1;
 				z=j-1;
@@ -186,8 +183,8 @@ void inteligencia_compu(int i, int j,int col){
 				}
 			}
 
-			//Para diagonal derecha abajo
-			if(tablero_c[i+1][j+1]==enemy){//Posibilidad de jugar por verificar diagonal derecha abajo
+			//Si puede comer en DIAGONAL DERECHA ABAJO
+			if(tablero_c[i+1][j+1]==enemy){
 				int z;
 				k=i+1;
 				z=j+1;
@@ -203,7 +200,7 @@ void inteligencia_compu(int i, int j,int col){
 					}
 				}
 			}
-
+			//Guarda las coordenadas con mayor posibilidad de comer
 			if(aux_compu>0){
 				if(mayor<=aux_compu){
 					mayor=aux_compu;
@@ -213,16 +210,16 @@ void inteligencia_compu(int i, int j,int col){
 			}
 		}
 	}
+
+	//Reiniciamos el contador para la proxima coordenada
 	aux_compu=0;
-	printf("\nEL MAYOR ES %d",mayor);
 }
 
 void verifica_validez1(guint i, guint j,int col){
-	printf("\nEntra en verifica validez1");
-	printf("\nFILA %d COLUMNA %d",i,j);
-	int k,aux=0,auxiliar=0;
-	//Para determinar ficha del que tiene el turno y su contrincante
+	int k,aux=0;
 	char enemy,player;
+
+	//Para determinar ficha del que tiene el turno y su contrincante
 	if(col==1){
 		player='B';
 		enemy='N';
@@ -230,31 +227,28 @@ void verifica_validez1(guint i, guint j,int col){
 		player='N';
 		enemy='B';
 	}
+
 	//si no selecciono una coordenada donde hay letras o numeros
 	if(i!=0 && j!=0){
-		//Si selecciono un espacio vacio
+		//Si es una casilla vacia
 		if(tablero_c[i][j]==' '){
-			//Tiene posibilidad de jugar si es que arriba hay enemigo que pueda encerrar
+			//Si puede comer HACIA ARRIBA
 			if(tablero_c[i-1][j]==enemy){
 				k=i-1;
-				while (tablero_c[k][j]==enemy && k>0){ //Comprueba que todo lo que recorra sea enemigo
+				while (tablero_c[k][j]==enemy && k>0){ //Si hay un ENEMY recorre hasta que haya un PLAYER o una casilla VACIA
 					k--;
-					if (tablero_c[k][j]==player){ //Hasta encontrar ficha del jugador
+					if (tablero_c[k][j]==player){ //Si hay PLAYER --> jugada valida
 						aux=k+1;
-						while(tablero_c[aux][j]==enemy){ //Cambia lo que puede encerrar
-							printf("\nREMPLAZA 1");
+						while(tablero_c[aux][j]==enemy){
 							tablero_c[aux][j]=player;
 							remplaza_imagenes(aux,j,col);
 							aux++;
-							auxiliar++;
 						}
 					}
 				}
 			}
 
-			//Tiene posibilidad de jugar si es que abajo hay enemigo que pueda encerrar
-			//Hace mismo procedimiento que posibilidad de jugar hacia arriba
-			//Recorre filas hacia abajo
+			//Si puede comer HACIA ABAJO
 			if(tablero_c[i+1][j]==enemy){
 				k=i+1;
 				while (tablero_c[k][j]==enemy && k<9){
@@ -262,18 +256,15 @@ void verifica_validez1(guint i, guint j,int col){
 					if (tablero_c[k][j]==player){
 						aux=k-1;
 						while(tablero_c[aux][j]==enemy){
-							printf("\nREMPLAZA 2");
 							tablero_c[aux][j]=player;
 							remplaza_imagenes(aux,j,col);
 							aux--;
-							auxiliar++;
 						}
 					}
 				}
 			}
 
-			//Tiene posibilidad de jugar si es que a la derecha hay enemigo que se pueda encerrar
-			//Recorre columnas a la derecha y cambia
+			//Si puede comer HACIA LA DERECHA
 			if(tablero_c[i][j+1]==enemy){
 				k=j+1;
 				while (tablero_c[i][k]==enemy && k<9){
@@ -281,18 +272,15 @@ void verifica_validez1(guint i, guint j,int col){
 					if (tablero_c[i][k]==player){
 						aux=k-1;
 						while(tablero_c[i][aux]==enemy){
-							printf("\nREMPLAZA 3");
 							tablero_c[i][aux]=player;
 							remplaza_imagenes(i,aux,col);
 							aux--;
-							auxiliar++;
 						}
 					}
 				}
 			}
 
-			//Tiene posibilidad de jugar si es que a la izquierda hay enemigo que pueda encerrar
-			//Recorre columnas a la izquiera y cambia de ser posible
+			//Si puede comer HACIA LA IZQUIERDA
 			if(tablero_c[i][j-1]==enemy){
 				k=j-1;
 				while (tablero_c[i][k]==enemy && k>0){
@@ -300,20 +288,17 @@ void verifica_validez1(guint i, guint j,int col){
 					if (tablero_c[i][k]==player){
 						aux=k+1;
 						while(tablero_c[i][aux]==enemy){
-							printf("\nREMPLAZA 4");
 							tablero_c[i][aux]=player;
 							remplaza_imagenes(i,aux,col);
 							aux++;
-							auxiliar++;
 						}
 					}
 				}
 			}
 
-			//Tiene la posibilidad de jugar si es que en su diagonal derecha arriba hay enemigo que pueda encerrar
-			//Recorre diagonal, cambia a favor del jugador de ser posible
+			//Si puede comer en DIAGONAL DERECHA ARRIBA
 			if(tablero_c[i-1][j+1]==enemy){
-				int z, aux2;//Variables para poder ubicar columnas a recorrer
+				int z, aux2;
 				k=i-1;
 				z=j+1;
 				while (tablero_c[k][z]==enemy && k>0 && z<9){
@@ -323,21 +308,18 @@ void verifica_validez1(guint i, guint j,int col){
 						aux=k+1;
 						aux2=z-1;
 						while(tablero_c[aux][aux2]==enemy){
-							printf("\nREMPLAZA 5");
 							tablero_c[aux][aux2]=player;
 							remplaza_imagenes(aux,aux2,col);
 							aux++;
 							aux2--;
-							auxiliar++;
 						}
 					}
 				}
 			}
 
-			//Tiene la posibilidad de jugar si es que en su diagonal izquierda arriba hay enemigo que se pueda encerrar.
-			//Recorre dicha diagonal, cambia las fichas de ser posible encerrar.
+			//Si puede comer en DIAGONAL IZQUIERDA ARRIBA
 			if(tablero_c[i-1][j-1]==enemy){
-				int z, aux2;//Variables para poder ubicar columnas a recorrer.
+				int z, aux2;
 				k=i-1;
 				z=j-1;
 				while (tablero_c[k][z]==enemy && k>0 && z>0){
@@ -347,21 +329,18 @@ void verifica_validez1(guint i, guint j,int col){
 						aux=k+1;
 						aux2=z+1;
 						while(tablero_c[aux][aux2]==enemy){
-							printf("\nREMPLAZA 6");
 							tablero_c[aux][aux2]=player;
 							remplaza_imagenes(aux,aux2,col);
 							aux++;
 							aux2++;
-							auxiliar++;
 						}
 					}
 				}
 			}
 
-			//Tiene la posibilidad de jugar si es que en su diagonal izquierda abajo hay enemigo que se pueda encerrar.
-			//Recorre dicha diagonal, cambia las fichas, de ser posible encerrarlas.
+			//Si puede comer en DIAGONAL IZQUIERDA ABAJO
 			if(tablero_c[i+1][j-1]==enemy){
-				int z, aux2;//Variables para poder ubicar columnas a recorrer.
+				int z, aux2;
 				k=i+1;
 				z=j-1;
 				while (tablero_c[k][z]==enemy && k<9 && z>0){
@@ -371,21 +350,18 @@ void verifica_validez1(guint i, guint j,int col){
 						aux=k-1;
 						aux2=z+1;
 						while(tablero_c[aux][aux2]==enemy){
-							printf("\nREMPLAZA 7");
 							tablero_c[aux][aux2]=player;
 							remplaza_imagenes(aux,aux2,col);
 							aux--;
 							aux2++;
-							auxiliar++;
 						}
 					}
 				}
 			}
 
-			//Tiene la posibilidad de jugar si es que en su diagonal derecha abajo hay enemigo que se pueda encerrar.
-			//Recorre dicha diagonal, cambia las fichas, de ser posible encerrarlas.
+			//Si puede comer en DIAGONAL DERECHA ABAJO
 			if(tablero_c[i+1][j+1]==enemy){
-				int z, aux2;//Variables para poder ubicar columnas a recorrer
+				int z, aux2;
 				k=i+1;
 				z=j+1;
 				while (tablero_c[k][z]==enemy && k<9 && z<9){
@@ -395,12 +371,10 @@ void verifica_validez1(guint i, guint j,int col){
 						aux=k-1;
 						aux2=z-1;
 						while(tablero_c[aux][aux2]==enemy){
-							printf("\nREMPLAZA 8");
 							tablero_c[aux][aux2]=player;
 							remplaza_imagenes(aux,aux2,col);
 							aux--;
 							aux2--;
-							auxiliar++;
 						}
 					}
 				}

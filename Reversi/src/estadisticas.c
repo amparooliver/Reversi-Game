@@ -73,6 +73,8 @@ int impresion_estadisticas(){
 	    }
 
 		nroPalabras= i;
+
+		/*
 		//Impresion sin ordenar en consola
 		for (i = 0; i < nroPalabras; ++i){
 	    	printf("%s\t%d\t%d\t%d\n", (ptr + i)->nombre_estadisticas,(ptr + i)->parJugadas,((ptr + i)->parGanadas),(ptr + i)->parPerdidas);
@@ -83,7 +85,7 @@ int impresion_estadisticas(){
 		//Impresion ordenada en consola
 		for (i = 0; i < nroPalabras; ++i){
 	    	printf("%s\t%d\t%d\t%d\n", (ptr + i)->nombre_estadisticas,(ptr + i)->parJugadas,((ptr + i)->parGanadas),(ptr + i)->parPerdidas);
-		}
+		}*/
 
 		//impresion en gtk
 		impresion_estadisticas_enGTK(ptr,nroPalabras);
@@ -95,24 +97,24 @@ int impresion_estadisticas(){
 void impresion_estadisticas_enGTK(struct statistics *ptr, int nroPalabras){
 
 		if(nroPalabras==1){
-			gchar *estadisticas = g_strdup_printf("%s\t%d\t%d\t%d\n", (ptr)->nombre_estadisticas,(ptr)->parJugadas,((ptr)->parGanadas),(ptr)->parPerdidas);
+			gchar *estadisticas = g_strdup_printf("%5s\t%5d\t%5d\t%5d\n", (ptr)->nombre_estadisticas,(ptr)->parJugadas,((ptr)->parGanadas),(ptr)->parPerdidas);
 			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
 			g_free(estadisticas);
 		}else if(nroPalabras==2){
-			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			gchar *estadisticas = g_strdup_printf("%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n",
 			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
 			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas);
 			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
 			g_free(estadisticas);
 		}else if(nroPalabras==3){
-			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			gchar *estadisticas = g_strdup_printf("%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n",
 			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
 			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
 			(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas);
 			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
 			g_free(estadisticas);
 		}else if(nroPalabras==4){
-			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			gchar *estadisticas = g_strdup_printf("%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n",
 			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
 			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
 			(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas,
@@ -120,7 +122,7 @@ void impresion_estadisticas_enGTK(struct statistics *ptr, int nroPalabras){
 			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
 			g_free(estadisticas);
 		}else if(nroPalabras==5){
-			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			gchar *estadisticas = g_strdup_printf("%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n",
 			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
 			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
 			(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas,
@@ -129,7 +131,7 @@ void impresion_estadisticas_enGTK(struct statistics *ptr, int nroPalabras){
 			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
 			g_free(estadisticas);
 		}else if(nroPalabras==6){
-			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			gchar *estadisticas = g_strdup_printf("%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n",
 			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
 			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
 			(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas,
@@ -139,7 +141,7 @@ void impresion_estadisticas_enGTK(struct statistics *ptr, int nroPalabras){
 			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
 			g_free(estadisticas);
 		}else if(nroPalabras==7){
-			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			gchar *estadisticas = g_strdup_printf("%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n",
 			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
 			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
 			(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas,
@@ -150,7 +152,7 @@ void impresion_estadisticas_enGTK(struct statistics *ptr, int nroPalabras){
 			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
 			g_free(estadisticas);
 		}else if(nroPalabras==8){
-			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			gchar *estadisticas = g_strdup_printf("%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n",
 			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
 			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
 			(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas,
@@ -162,7 +164,7 @@ void impresion_estadisticas_enGTK(struct statistics *ptr, int nroPalabras){
 			gtk_label_set_text(GTK_LABEL(label_estadisticas), estadisticas);
 			g_free(estadisticas);
 		}else if(nroPalabras==9){
-			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			gchar *estadisticas = g_strdup_printf("%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n",
 			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
 			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
 			(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas,
@@ -176,7 +178,7 @@ void impresion_estadisticas_enGTK(struct statistics *ptr, int nroPalabras){
 			g_free(estadisticas);
 		}
 		else{
-			gchar *estadisticas = g_strdup_printf("%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n%s\t\t%d\t\t%d\t\t%d\n",
+			gchar *estadisticas = g_strdup_printf("%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n%5s\t\t%5d\t\t%5d\t\t%5d\n",
 			(ptr + 0)->nombre_estadisticas,(ptr + 0)->parJugadas,((ptr + 0)->parGanadas),(ptr + 0)->parPerdidas,
 			(ptr + 1)->nombre_estadisticas,(ptr + 1)->parJugadas,((ptr + 1)->parGanadas),(ptr + 1)->parPerdidas,
 			(ptr + 2)->nombre_estadisticas,(ptr + 2)->parJugadas,((ptr + 2)->parGanadas),(ptr + 2)->parPerdidas,
@@ -194,7 +196,7 @@ void impresion_estadisticas_enGTK(struct statistics *ptr, int nroPalabras){
 
 }
 int actualizacion_estadisticas(){
-	printf("\n Entra en actualizaciion estad");
+
 	char line[100];
 	struct statistics *ptr;
 	int i=0, nroPalabras,existeJugador=0,existeRival=0;
@@ -204,17 +206,18 @@ int actualizacion_estadisticas(){
 	char aux2[20];
 	char aux3[20];
 
-	//ABRIMOS EL ARCHIVO PARA ESCRIBIR
+	// Abrimos el archivo para leer
 	infile = fopen(inname, "r");
 	if (!infile) {
 		printf("Couldn't open %s for reading and writing\n",inname);
 		return 0;
 	}
 
-	//reservamos un espacio en la memoria para la estructura
+	// Reservamos un espacio en la memoria para la estructura
     ptr = (struct statistics *)malloc(sizeof(struct statistics));
 	while(i < 100 && fgets(line, sizeof(line), infile) != NULL){
-    	//almacenamos el nombre,  partidas jugadas, partidas ganadas, partidas perdidas
+
+    	// Almacenamos el nombre,  partidas jugadas, partidas ganadas, partidas perdidas
     	sscanf(line, "%s\t%s\t%s\t%[^\n]",(ptr + i)->nombre_estadisticas,aux,aux2,aux3);
 
         ((ptr + i)->parJugadas)=atoi(aux);
@@ -223,7 +226,7 @@ int actualizacion_estadisticas(){
 
         i++;
 
-        //incrementamos el espacio de memoria de la estructura
+        // Incrementamos el espacio de memoria de la estructura
         ptr = (struct statistics *)realloc(ptr,sizeof(struct statistics)*(i+1));
     }
 
@@ -231,77 +234,54 @@ int actualizacion_estadisticas(){
 
 	fclose(infile);
 
+	//Abrimos el archivo para escribir/leer
 	infile = fopen(inname, "w+");
 	if (!infile) {
 		printf("Couldn't open %s for reading and writing\n",inname);
 		return 0;
 	}
 
-	printf("\nNRO DE PALABRAS: %d",nroPalabras);
-	for (i = 0; i < nroPalabras; ++i){
-		printf("%s\t%d\t%d\t%d\n", (ptr + i)->nombre_estadisticas,(ptr + i)->parJugadas,((ptr + i)->parGanadas),(ptr + i)->parPerdidas);
-	}
-
+	// Recorre la estructura
 	for(i=0; i<nroPalabras-1; i++) {
+		//BUSCA AL USUARIO EN EL ARCHIVO
 		if(strcmp(((ptr+i)->nombre_estadisticas),nombre)==0){
-
-			//Variable bandera si existe el jugador en el archivo
 			existeJugador=1;
+			((ptr + i)->parJugadas)++; // Encuentra el nombre e incrementa Partidas Jugadas
 
-			//ENCUENTRA EL NOMBRE E INCREMENTA
-			((ptr + i)->parJugadas)=((ptr + i)->parJugadas+1);
-			printf("%d jugadas \n", (ptr+i)->parJugadas);
-
-			//GANA USUARIO
-			if(gano==1){
+			if(gano==1){ // Gana el USUARIO, incrementa Partidas Ganadas
 				((ptr + i)->parGanadas)++;
-				printf("%d ganadas \n", (ptr+i)->parGanadas);
-
-			//GANA COMPUTADORA
-			}else if(gano==0){
+			}else if(gano==0){// Gana la COMPUTADORA, incrementa Partidas Perdidas
 				((ptr + i)->parPerdidas)++;
-				printf("%d perdidas \n", (ptr+i)->parPerdidas);
-
-			//EMPATARON
-			}else if(gano==2){
-				   //no aumenta nada
+			}else if(gano==2){ // Empataron
+				   //no aumenta nada por ahora
 			}
+
 		}else if(strcmp(((ptr+i)->nombre_estadisticas),rival)==0){
-			//Variable bandera si existe el rival en el archivo
 			existeRival=1;
+			((ptr + i)->parJugadas)++;
 
-			//ENCUENTRA EL NOMBRE E INCREMENTA
-			((ptr + i)->parJugadas)=((ptr + i)->parJugadas+1);
-			printf("%d jugadas \n", (ptr+i)->parJugadas);
-
-			//PIERDE COMPUTADORA
-			if(gano==1){
+			if(gano==1){ // Gana el USUARIO, incrementa Partidas Perdidas
 				((ptr + i)->parPerdidas)++;
-				printf("%d perdidas \n", (ptr+i)->parPerdidas);
 
-			//GANA COMPUTADORA
-			}else if(gano==0){
+			}else if(gano==0){// Gana la COMPUTADORA, incrementa Partidas Ganadas
 				((ptr + i)->parGanadas)++;
-				printf("%d ganadas \n", (ptr+i)->parGanadas);
-
-			//EMPATARON
 			}else if(gano==2){
-				   //no aumenta nada
+				   // Empate
 			}
 		}
 	}
 
-	//si es que no existe ese nombre de JUGADOR en estadisticas, agrega al struct
+	//si es que NO existe el nombre de JUGADOR en estadisticas, agrega al struct
 	if(existeJugador==0){
-		//incremento el nroPalabras para el struct
-		nroPalabras++;
 
-		//incrementamos el espacio de memoria de la estructura
-		ptr = (struct statistics *)realloc(ptr,sizeof(struct statistics)*(nroPalabras+1));
+		nroPalabras++; //incremento el nroPalabras para el struct
+
+		ptr = (struct statistics *)realloc(ptr,sizeof(struct statistics)*(nroPalabras+1)); //incrementamos el espacio de memoria de la estructura
 
 		i = nroPalabras - 1; //apunta a la ult posicion en el struct
+
 		strcpy(((ptr + i)->nombre_estadisticas),nombre); //agrega el nombre al struct
-		((ptr + i)->parJugadas)= 1 ;  // agrega Partidas jugadas = 1
+		((ptr + i)->parJugadas)= 1 ;  // agrega Partidas Jugadas = 1
 		//GANA USUARIO
 		if(gano==1){
 			((ptr + i)->parGanadas)= 1 ; // agrega Partidas Ganadas = 1
@@ -315,18 +295,18 @@ int actualizacion_estadisticas(){
 			((ptr + i)->parGanadas)= 0 ;
 			((ptr + i)->parPerdidas)= 0 ;
 		}
-
-
 	}
 
-	//si es que no existe ese nombre de RIVAL en estadisticas, agrega al struct
+	// Si es que NO existe el nombre de RIVAL en estadisticas, agrega al struct
 	if(existeRival==0){
-		//incremento el nroPalabras para el struct
-		nroPalabras++;
 
-		//incrementamos el espacio de memoria de la estructura
+		nroPalabras++; // Incremento el nroPalabras para el struct
+
+		// Incrementamos el espacio de memoria de la estructura
 		ptr = (struct statistics *)realloc(ptr,sizeof(struct statistics)*(nroPalabras+1));
-		i = nroPalabras-1;
+
+		i = nroPalabras-1; //apunta a la ult posicion en el struct
+
 		strcpy(((ptr + i)->nombre_estadisticas),rival); //agrega el rival al struct
 		((ptr + i)->parJugadas)= 1 ;  // agrega Partidas jugadas = 1
 		//GANA USUARIO
@@ -342,20 +322,13 @@ int actualizacion_estadisticas(){
 			((ptr + i)->parGanadas)= 0 ;
 			((ptr + i)->parPerdidas)= 0 ;
 		}
-
-	}
-	printf("\nNRO DE PALABRAS: %d",nroPalabras);
-	for (i = 0; i < nroPalabras; ++i){
-		printf("%s\t%d\t%d\t%d\n", (ptr + i)->nombre_estadisticas,(ptr + i)->parJugadas,((ptr + i)->parGanadas),(ptr + i)->parPerdidas);
 	}
 
-	//
+	// Se escribe el nuevo struct en el txt
 	for (i = 0; i < nroPalabras; ++i){
     	fprintf(infile,"%s\t%d\t%d\t%d\n",(ptr + i)->nombre_estadisticas,(ptr + i)->parJugadas,((ptr + i)->parGanadas),(ptr + i)->parPerdidas);
 	}
 
 	fclose(infile);
-
-
 	return 0;
 }
