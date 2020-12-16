@@ -200,10 +200,27 @@ void inteligencia_compu(int i, int j,int col){
 					}
 				}
 			}
-			//Guarda las coordenadas con mayor posibilidad de comer
+			//Verifica que la casilla sea valida
 			if(aux_compu>0){
+				//Guarda las coordenadas con mayor posibilidad de comer
+				//importancia de NIVEL CUATRO (menor a mayor, 4 siendo el menor)
 				if(mayor<=aux_compu){
 					mayor=aux_compu;
+					i_aux=i;
+					j_aux=j;
+				}
+				//importancia de NIVEL TRES
+				if((i==3 && j==3) || (i==3 && j==6) || (i==6 && j==3) || (i==6 && j==6)){
+					i_aux=i;
+					j_aux=j;
+				}
+				//importancia de NIVEL DOS
+				if((i==3 && j==1) || (i==6 && j==1) || (i==3 && j==8) || (i==6 && j==8)){
+					i_aux=i;
+					j_aux=j;
+				}
+				//importancia de NIVEL UNO
+				if((i==1 && j==1) || (i==1 && j==8) || (i==8 && j==1) || (i==8 && j==8)){
 					i_aux=i;
 					j_aux=j;
 				}

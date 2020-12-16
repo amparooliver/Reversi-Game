@@ -5,3 +5,5 @@ Gonzalo	15	10	5
 Andrea	5	4	1
 Matias	9	1	8
 Pepe	12	6	6
+a	1	0	1
+b	1	1	0
