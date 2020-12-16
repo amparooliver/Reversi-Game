@@ -30,6 +30,7 @@ GtkButton *boton_inicio;
 GtkWidget *entry_usuario;
 GtkWidget *entry_rival;
 GtkButton *boton_humanovscompu;
+GtkButton *boton_compuvscompu;
 GtkButton *boton_salir_ganaste;
 GtkButton *boton_jugar_ganaste;
 GtkButton *boton_salir_perdiste;
@@ -157,7 +158,7 @@ static void enter_callback2( GtkWidget *widget, GtkWidget *entry ){
   printf ("rival: %s\n", rival);
 }
 void on_boton_iniciar_clicked(GtkButton *boton_inicio, gpointer data){
-
+	compu_vs_compu();
 	if (color!=0 && turno!=0){
 		nombre = gtk_entry_get_text (GTK_ENTRY (entry_usuario));
 		printf ("nombre: %s\n", nombre);
@@ -174,9 +175,17 @@ void on_boton_iniciar_clicked(GtkButton *boton_inicio, gpointer data){
 	}
 
 	g_signal_connect (window, "destroy", G_CALLBACK (gtk_main_quit), NULL);
+
 }
 
 void boton_modo_humanovscompu(GtkButton *boton_modo, gpointer data){
+	gtk_button_set_label(GTK_BUTTON(boton_usuario),"COMPUTADORA LOCAL");
+	gtk_button_set_label(GTK_BUTTON(boton_computadora),"COMPUTADORA RIVAL");
+	gtk_widget_hide(GTK_WIDGET(ventana_modo));
+	gtk_widget_show_all(ventana_inicial);
+	g_signal_connect (ventana_inicial, "destroy", G_CALLBACK (gtk_main_quit), NULL);
+}
+void boton_modo_compuvscompu(GtkButton *boton_modo, gpointer data){
 	gtk_widget_hide(GTK_WIDGET(ventana_modo));
 	gtk_widget_show_all(ventana_inicial);
 
@@ -248,6 +257,7 @@ void jugar_de_nuevo(GtkButton *boton, gpointer data){
 	boton_aleatorio_turno = GTK_RADIO_BUTTON(gtk_builder_get_object(builder, "boton_aleatorio_turno"));
 	boton_inicio= GTK_BUTTON(gtk_builder_get_object(builder, "boton_iniciar"));
 	boton_humanovscompu= GTK_BUTTON(gtk_builder_get_object(builder, "boton_compuvshum"));
+	boton_compuvscompu= GTK_BUTTON(gtk_builder_get_object(builder, "boton_compuvscompu"));
 
 	boton_salir_ganaste=GTK_BUTTON(gtk_builder_get_object(builder, "ganaste_salir"));
 	boton_jugar_ganaste=GTK_BUTTON(gtk_builder_get_object(builder, "ganaste_jugardenuevo"));
@@ -279,6 +289,7 @@ void jugar_de_nuevo(GtkButton *boton, gpointer data){
 	g_signal_connect(G_OBJECT(boton_aleatorio_turno), "clicked", G_CALLBACK(boton_aleatorio_turno_pressed), NULL);
 	g_signal_connect(G_OBJECT(boton_inicio), "clicked", G_CALLBACK(on_boton_iniciar_clicked), NULL);
 	g_signal_connect(G_OBJECT(boton_humanovscompu), "clicked", G_CALLBACK(boton_modo_humanovscompu), NULL);
+	g_signal_connect(G_OBJECT(boton_compuvscompu), "clicked", G_CALLBACK(boton_modo_humanovscompu), NULL);
 	g_signal_connect(G_OBJECT(boton_salir_ganaste), "clicked", G_CALLBACK(gtk_main_quit), NULL);
 	g_signal_connect(G_OBJECT(boton_jugar_ganaste), "clicked", G_CALLBACK(jugar_de_nuevo), NULL);
 	g_signal_connect(G_OBJECT(boton_salir_perdiste), "clicked", G_CALLBACK(gtk_main_quit), NULL);

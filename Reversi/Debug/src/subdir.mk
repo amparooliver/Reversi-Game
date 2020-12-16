@@ -5,18 +5,21 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/ReversiGTK.c \
+../src/compuvscompu.c \
 ../src/estadisticas.c \
 ../src/inteligencia.c \
 ../src/logica.c 
 
 OBJS += \
 ./src/ReversiGTK.o \
+./src/compuvscompu.o \
 ./src/estadisticas.o \
 ./src/inteligencia.o \
 ./src/logica.o 
 
 C_DEPS += \
 ./src/ReversiGTK.d \
+./src/compuvscompu.d \
 ./src/estadisticas.d \
 ./src/inteligencia.d \
 ./src/logica.d 

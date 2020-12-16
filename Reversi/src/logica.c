@@ -492,7 +492,6 @@ void puntos(int col){
 	}
 	printf ("\n Puntos obtenidos: \n Blancas: %d\n Negras: %d\n", blancas, negras);
 
-	//actualizacion_estadisticas();
 
 	if(blancas>negras){
 		if (col==1){
@@ -534,7 +533,7 @@ void puntos(int col){
 			gchar *perdedor1 = g_strdup_printf("SERA LA PROXIMA %s!\n SANTA: %d puntos\n RENO: %d puntos", nombre, blancas, negras);
 			gtk_label_set_text(GTK_LABEL(label_resultados2), perdedor1);
 			g_free(perdedor1);
-			actualizacion_estadisticas();
+
 			g_signal_connect (ventana_perdiste, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 		}
 		else{
@@ -548,7 +547,7 @@ void puntos(int col){
 			gchar *ganador1 = g_strdup_printf("JOJOJO! FELICIDADES %s!\n SANTA: %d puntos\n RENO: %d puntos", nombre, blancas, negras);
 			gtk_label_set_text(GTK_LABEL(label_resultados1), ganador1);
 			g_free(ganador1);
-			actualizacion_estadisticas();
+
 			g_signal_connect (ventana_ganaste1, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 		}
 	}
@@ -561,9 +560,10 @@ void puntos(int col){
 		gchar *empataron = g_strdup_printf("QUE LOCURA %s!\n SANTA: %d puntos\n RENO: %d puntos", nombre, blancas, negras);
 		gtk_label_set_text(GTK_LABEL(label_resultados3), empataron);
 		g_free(empataron);
-		actualizacion_estadisticas();
 		g_signal_connect (ventana_empataron, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 	}
+
+	actualizacion_estadisticas();
 
 }
 
