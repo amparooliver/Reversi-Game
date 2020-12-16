@@ -68,4 +68,5 @@ void ordenar(int nroPalabras, struct statistics *ptr); //Ordena el struct statis
 void impresion_estadisticas_enGTK(struct statistics *ptr,int nroPalabras); //Imprime en ventana GTK los top 10 jugadores
 int actualizacion_estadisticas(); //Actualiza el archivo txt
 int compu_vs_compu();
-
+int conversion_columna(char aux);
+int conversion_fila(char aux);
