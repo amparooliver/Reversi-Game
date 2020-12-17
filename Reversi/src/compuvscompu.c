@@ -12,6 +12,8 @@ int compu_vs_compu(){
 
 	  FILE *infile;
 	  char *inname = "./src/gonzalo.txt";
+	  FILE *outfile;
+	  char *inRival= "./src/amparo.txt";
 	  char coordenada[100];
 	  char line[100];
 	  char f,c;
@@ -49,6 +51,13 @@ int compu_vs_compu(){
 		  printf("\nThe file is Deleted successfully");
 	  else
 	      printf("\nthe file is not Deleted");
+
+
+	  	outfile = fopen(inRival, "w+");
+	  	if (!outfile) {
+	  		printf("Couldn't open %s for writing\n",inRival);
+	  		return 0;
+	  	}
 
 
 		return 0;
