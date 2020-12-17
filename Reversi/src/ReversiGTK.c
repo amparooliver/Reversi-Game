@@ -106,11 +106,11 @@ GtkWidget *crear_tablero(){
 
 	for (i = 0; i < MAX_FILA; i++) {
 		auxiliar = gtk_image_new_from_file(imagenes_letras[i]);
-		gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(auxiliar), 0, i, 1, 1);
+		gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(auxiliar), i, 0, 1, 1);
 	}
 	for (j = 0; j < MAX_COLUMNA; j++) {
 		auxiliar = gtk_image_new_from_file(imagenes_nros[j]);
-		gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(auxiliar), j+1, 0, 1, 1);
+		gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(auxiliar), 0, j+1, 1, 1);
 	}
 
 	gtk_container_add(GTK_CONTAINER(eventbox), tablero);
@@ -158,19 +158,38 @@ static void enter_callback2( GtkWidget *widget, GtkWidget *entry ){
   printf ("rival: %s\n", rival);
 }
 void on_boton_iniciar_clicked(GtkButton *boton_inicio, gpointer data){
-	compu_vs_compu();
-	if (color!=0 && turno!=0){
-		nombre = gtk_entry_get_text (GTK_ENTRY (entry_usuario));
-		printf ("nombre: %s\n", nombre);
+	if(modo_juego==0){
+		if (color!=0 && turno!=0){
+			nombre = gtk_entry_get_text (GTK_ENTRY (entry_usuario));
+			printf ("nombre: %s\n", nombre);
 
-		rival = gtk_entry_get_text (GTK_ENTRY (entry_rival));
-		printf ("rival: %s\n", rival);
+			rival = gtk_entry_get_text (GTK_ENTRY (entry_rival));
+			printf ("rival: %s\n", rival);
 
-		gtk_widget_hide(GTK_WIDGET(ventana_inicial));
-		gtk_widget_show_all(window);
+			gtk_widget_hide(GTK_WIDGET(ventana_inicial));
+			gtk_widget_show_all(window);
 
-		if(turno==2){
-			g_timeout_add(1500,turno_computadora,NULL);
+			if(turno==2){
+				g_timeout_add(1500,turno_computadora,NULL);
+			}
+		}
+	}
+	else if(modo_juego==1){
+		if (color!=0 && turno!=0){
+			nombre = gtk_entry_get_text (GTK_ENTRY (entry_usuario));
+			printf ("Nombre de la compu local: %s\n", nombre);
+
+			rival = gtk_entry_get_text (GTK_ENTRY (entry_rival));
+			printf ("Nombre de la compu rival: %s\n", rival);
+
+			gtk_widget_hide(GTK_WIDGET(ventana_inicial));
+			gtk_widget_show_all(window);
+
+			if(turno==2){
+				compu_vs_compu();
+			}else if(turno==1){
+				secuencia_juego();
+			}
 		}
 	}
 
@@ -181,11 +200,13 @@ void on_boton_iniciar_clicked(GtkButton *boton_inicio, gpointer data){
 void boton_modo_humanovscompu(GtkButton *boton_modo, gpointer data){
 	gtk_widget_hide(GTK_WIDGET(ventana_modo));
 	gtk_widget_show_all(ventana_inicial);
+	modo_juego=0;
 	g_signal_connect (ventana_inicial, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 }
 void boton_modo_compuvscompu(GtkButton *boton_modo, gpointer data){
 	gtk_button_set_label(GTK_BUTTON(boton_usuario),"COMPUTADORA LOCAL");
 	gtk_button_set_label(GTK_BUTTON(boton_computadora),"COMPUTADORA RIVAL");
+	modo_juego=1;
 	gtk_widget_hide(GTK_WIDGET(ventana_modo));
 	gtk_widget_show_all(ventana_inicial);
 

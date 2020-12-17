@@ -15,37 +15,74 @@ int j_aux=0;
 
 int turno_computadora(){
 	int i,j,x,y;
+	if(modo_juego==0){
+		gchar *turno_de = g_strdup_printf("Turno de: %s", nombre);
+		gtk_label_set_text(GTK_LABEL(label_turno), turno_de);
+		g_free(turno_de);
+	}else if(modo_juego==1){
+		gchar *turno_de = g_strdup_printf("Turno de: %s", rival);
+		gtk_label_set_text(GTK_LABEL(label_turno), turno_de);
+		g_free(turno_de);
+	}
 
-	gchar *turno_de = g_strdup_printf("Turno de: %s", nombre);
-	gtk_label_set_text(GTK_LABEL(label_turno), turno_de);
-	g_free(turno_de);
 	srand(time(NULL));
 
-	if(pierde_turno(computadora)==FALSE){
-		for(x=0;x<9;x++){
-			for(y=0;y<9;y++){
-				i= x;
-				j= y;
-				inteligencia_compu(i,j,computadora);
+	if(modo_juego==0){
+		if(pierde_turno(computadora)==FALSE){
+				for(x=0;x<9;x++){
+					for(y=0;y<9;y++){
+						i= x;
+						j= y;
+						inteligencia_compu(i,j,computadora);
+					}
+				}
+
+				verifica_validez1(i_aux,j_aux,computadora);
+				insertar_ficha(i_aux,j_aux,computadora);
+				remplaza_imagenes(i_aux,j_aux,computadora);
+				mayor=0;
+
+				gchar *temp = g_strdup_printf("Tu rival %s ha insertado una ficha en [%c,%d]", rival,('A'+ i_aux-1) ,j_aux);
+				gtk_label_set_text(GTK_LABEL(label_estado), temp);
+				g_free(temp);
+
+				gchar *pasa_turno = g_strdup_printf("Turno de %s", nombre);
+				gtk_label_set_text(GTK_LABEL(label_turno), pasa_turno);
+				g_free(pasa_turno);
+		}else{
+				//printf("\nNo hay movimiento posible para la computadora. \n");
+				}
+
+	}else if(modo_juego==1){
+		if(pierde_turno(jugador)==FALSE){
+				for(x=0;x<9;x++){
+					for(y=0;y<9;y++){
+						i= x;
+						j= y;
+						inteligencia_compu(i,j,jugador);
+					}
+				}
+
+				verifica_validez1(i_aux,j_aux,jugador);
+				insertar_ficha(i_aux,j_aux,jugador);
+				remplaza_imagenes(i_aux,j_aux,jugador);
+				mayor=0;
+
+				gchar *temp = g_strdup_printf("La compu local %s ha insertado una ficha en [%c,%d]", nombre,('A'+ i_aux-1) ,j_aux);
+				gtk_label_set_text(GTK_LABEL(label_estado), temp);
+				g_free(temp);
+
+				gchar *pasa_turno = g_strdup_printf("Turno de %s", rival);
+				gtk_label_set_text(GTK_LABEL(label_turno), pasa_turno);
+				g_free(pasa_turno);
+				empieza_computadora(i_aux,j_aux);
+		}else{
+				//printf("\nNo hay movimiento posible para la computadora. \n");
+			empieza_computadora(0,0);
 			}
-		}
-
-		verifica_validez1(i_aux,j_aux,computadora);
-		insertar_ficha(i_aux,j_aux,computadora);
-		remplaza_imagenes(i_aux,j_aux,computadora);
-		mayor=0;
-
-		gchar *temp = g_strdup_printf("Tu rival %s ha insertado una ficha en [%c,%d]", rival,('A'+ i_aux-1) ,j_aux);
-		gtk_label_set_text(GTK_LABEL(label_estado), temp);
-		g_free(temp);
-
-		gchar *pasa_turno = g_strdup_printf("Turno de %s", nombre);
-		gtk_label_set_text(GTK_LABEL(label_turno), pasa_turno);
-		g_free(pasa_turno);
-	}else{
-		//printf("\nNo hay movimiento posible para la computadora. \n");
-
 	}
+
+
 return 0;
 }
 

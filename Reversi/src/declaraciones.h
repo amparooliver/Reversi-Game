@@ -37,7 +37,7 @@ GtkWidget *ventana_estadisticas;
 
 //VARIABLES DE LOGICA, INTELIGENCIA, ESTADISTICAS
 int color, computadora, jugador, turno, i, j;
-int gano;
+int gano,modo_juego;
 char buffer;
 char tablero_c[9][9];
 struct statistics{
@@ -70,3 +70,5 @@ int actualizacion_estadisticas(); //Actualiza el archivo txt
 int compu_vs_compu();
 int conversion_columna(char aux);
 int conversion_fila(char aux);
+void secuencia_juego();
+int empieza_computadora(int f, int c);
