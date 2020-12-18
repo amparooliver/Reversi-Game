@@ -16,27 +16,33 @@ int compu_vs_compu(){
 	  char line[100];
 	  char f,c;
 	  int fila,columna;
-	  char aux[4]="PASO";
 
 	  //ABRIMOS EL ARCHIVO
-	  infile = fopen(inname, "r");
 	  do{
-		  while(fgets(line, sizeof(line), infile) != NULL){
-			  printf("\nENTRA AL WHILE");
-			  //almacenamos la linea
-			  sscanf(line, "%s",coordenada);
-		  }
-		 rewind(infile);
-		 c= getc(infile);
-		 f= getc(infile);
+		  infile = fopen(inname, "r");
+		  printf("\nEsPERANDO AL ARCHIVO");
 
 	  }while (!infile);
+	  while(fgets(line, sizeof(line), infile) != NULL){
+		  printf("\nENTRA AL WHILE");
+		  //almacenamos la linea
+		  sscanf(line, "%s",coordenada);
+	  }
+	 rewind(infile);
+	 c= getc(infile);
+	 f= getc(infile);
 	  //prueba en consola de lo que guarda
 	  printf("COORDENADA %s\n",coordenada);
 	  fclose(infile);
 
-	  if((strcmp(aux,coordenada))==0){
+	  if((strcmp("PASO",coordenada))==0){
 		  printf("\nEntra en pasar turno.");
+		  int del = remove("./src/gonzalo.txt");
+		  if (!del)
+			  printf("\nThe file is Deleted successfully");
+		  else
+		      printf("\nthe file is not Deleted");
+		  secuencia_juego();
 	  }else{
 		  printf("\nIngreso coordenadas");
 		  printf("\nfila: %c",f);
@@ -53,14 +59,15 @@ int compu_vs_compu(){
 		  gtk_label_set_text(GTK_LABEL(label_turno), pasa_turno);
 		  g_free(pasa_turno);
 		  printf("\niNSERTA SUS FICHAS");
+		  int del = remove("./src/gonzalo.txt");
+		  if (!del)
+			  printf("\nThe file is Deleted successfully");
+		  else
+		      printf("\nthe file is not Deleted");
+		  secuencia_juego();
 
 	  }
-	  int del = remove("./src/gonzalo.txt");
-	  if (!del)
-		  printf("\nThe file is Deleted successfully");
-	  else
-	      printf("\nthe file is not Deleted");
-	  secuencia_juego();
+
 		return 0;
 
 }

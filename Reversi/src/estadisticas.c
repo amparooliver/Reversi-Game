@@ -74,7 +74,7 @@ int impresion_estadisticas(){
 
 		nroPalabras= i;
 
-		/*
+		
 		//Impresion sin ordenar en consola
 		for (i = 0; i < nroPalabras; ++i){
 	    	printf("%s\t%d\t%d\t%d\n", (ptr + i)->nombre_estadisticas,(ptr + i)->parJugadas,((ptr + i)->parGanadas),(ptr + i)->parPerdidas);
@@ -85,7 +85,7 @@ int impresion_estadisticas(){
 		//Impresion ordenada en consola
 		for (i = 0; i < nroPalabras; ++i){
 	    	printf("%s\t%d\t%d\t%d\n", (ptr + i)->nombre_estadisticas,(ptr + i)->parJugadas,((ptr + i)->parGanadas),(ptr + i)->parPerdidas);
-		}*/
+		}
 
 		//impresion en gtk
 		impresion_estadisticas_enGTK(ptr,nroPalabras);
