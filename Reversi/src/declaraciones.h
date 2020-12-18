@@ -33,7 +33,7 @@ GtkWidget *ventana_perdiste;
 GtkWidget *ventana_ganaste;
 GtkWidget *ventana_ganaste1;
 GtkWidget *ventana_empataron;
-GtkWidget *ventana_estadisticas;
+GObject *ventana_estadisticas;
 
 //VARIABLES DE LOGICA, INTELIGENCIA, ESTADISTICAS
 int color, computadora, jugador, turno, i, j;

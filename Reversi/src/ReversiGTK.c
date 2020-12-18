@@ -39,8 +39,8 @@ GtkButton *boton_salir_empataron;
 GtkButton *boton_jugar_empataron;
 
 static void mostrar_ayuda(GtkWidget *widget, gpointer data){
-	gtk_widget_show(GTK_WIDGET(dialogAyuda));
-	//gtk_widget_hide(GTK_WIDGET(dialogAyuda));
+	gtk_dialog_run(GTK_DIALOG(dialogAyuda));
+	gtk_widget_hide(GTK_WIDGET(dialogAyuda));
 }
 
 static void mostrar_acerca(GtkWidget *widget, gpointer data){
@@ -54,9 +54,8 @@ static void menu_cerrar(GtkWidget *widget, gpointer data){
 
 static void menu_estadisticas(GtkWidget *widget, gpointer data){
 	impresion_estadisticas();
-	gtk_widget_show(GTK_WIDGET(ventana_estadisticas));
-
-
+	gtk_dialog_run(GTK_DIALOG(ventana_estadisticas));
+	gtk_widget_hide(GTK_WIDGET(ventana_estadisticas));
 }
 
 void tablero_cb(GtkWidget *event_box, GdkEventButton *event, gpointer data){
@@ -213,13 +212,6 @@ void boton_modo_compuvscompu(GtkButton *boton_modo, gpointer data){
 	g_signal_connect (ventana_inicial, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 }
 
-void jugar_de_nuevo(GtkButton *boton, gpointer data){
-	gtk_widget_hide(GTK_WIDGET(ventana_perdiste));
-	gtk_widget_hide(GTK_WIDGET(ventana_ganaste));
-	gtk_widget_hide(GTK_WIDGET(ventana_empataron));
-	gtk_widget_show_all(ventana_modo);
-}
-
  int main (int argc, char *argv[]){
 
 	color=0;
@@ -266,7 +258,7 @@ void jugar_de_nuevo(GtkButton *boton, gpointer data){
 	//Ventana modo
 	ventana_modo= GTK_WIDGET(gtk_builder_get_object(builder, "ventana_modo"));
 
-	ventana_estadisticas= GTK_WIDGET(gtk_builder_get_object(builder, "ventana_estadisticas"));
+	ventana_estadisticas= gtk_builder_get_object(builder, "ventana_estadisticas");
 
 
 	//Botones
@@ -281,9 +273,7 @@ void jugar_de_nuevo(GtkButton *boton, gpointer data){
 	boton_compuvscompu= GTK_BUTTON(gtk_builder_get_object(builder, "boton_compuvscompu"));
 
 	boton_salir_ganaste=GTK_BUTTON(gtk_builder_get_object(builder, "ganaste_salir"));
-	boton_jugar_ganaste=GTK_BUTTON(gtk_builder_get_object(builder, "ganaste_jugardenuevo"));
 	boton_salir_perdiste=GTK_BUTTON(gtk_builder_get_object(builder, "boton_perdiste_salir"));
-	boton_salir_ganaste=GTK_BUTTON(gtk_builder_get_object(builder, "boton_perdiste_jugardenuevo"));
 
 	//estado inicial de los botones
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (boton_santa), TRUE);
@@ -312,9 +302,7 @@ void jugar_de_nuevo(GtkButton *boton, gpointer data){
 	g_signal_connect(G_OBJECT(boton_humanovscompu), "clicked", G_CALLBACK(boton_modo_humanovscompu), NULL);
 	g_signal_connect(G_OBJECT(boton_compuvscompu), "clicked", G_CALLBACK(boton_modo_compuvscompu), NULL);
 	g_signal_connect(G_OBJECT(boton_salir_ganaste), "clicked", G_CALLBACK(gtk_main_quit), NULL);
-	g_signal_connect(G_OBJECT(boton_jugar_ganaste), "clicked", G_CALLBACK(jugar_de_nuevo), NULL);
 	g_signal_connect(G_OBJECT(boton_salir_perdiste), "clicked", G_CALLBACK(gtk_main_quit), NULL);
-	g_signal_connect(G_OBJECT(boton_jugar_perdiste), "clicked", G_CALLBACK(jugar_de_nuevo), NULL);
 
 
 	/* Conectamos las señales a los callbacks correspondientes */

@@ -2,18 +2,48 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.12"/>
-  <object class="GtkWindow" id="ayuda_reversi">
+  <object class="GtkDialog" id="ayuda_reversi">
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Reglas del Juego</property>
+    <property name="title" translatable="yes">REGLAS DEL JUEGO</property>
     <property name="resizable">False</property>
+    <property name="type_hint">dialog</property>
     <child>
       <placeholder/>
     </child>
-    <child>
-      <object class="GtkImage">
-        <property name="visible">True</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="box_ayuda1">
         <property name="can_focus">False</property>
-        <property name="pixbuf">IMG/IMG-Dec122020at100111.png</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="botones_ayuda1">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage" id="imagen_reglas ">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">IMG/IMG-Dec122020at100111.png</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
       </object>
     </child>
   </object>
@@ -696,17 +726,7 @@
             <property name="can_focus">False</property>
             <property name="layout_style">start</property>
             <child>
-              <object class="GtkButton" id="boton_empataron_jugardenuevo">
-                <property name="label" translatable="yes">Jugar de nuevo</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
+              <placeholder/>
             </child>
             <child>
               <object class="GtkButton" id="boton_empataron_salir">
@@ -731,37 +751,46 @@
       </object>
     </child>
   </object>
-  <object class="GtkWindow" id="ventana_estadisticas">
+  <object class="GtkDialog" id="ventana_estadisticas">
     <property name="can_focus">False</property>
+    <property name="resizable">False</property>
+    <property name="hide_titlebar_when_maximized">True</property>
+    <property name="type_hint">dialog</property>
     <child>
       <placeholder/>
     </child>
-    <child>
-      <object class="GtkBox" id="box_estadisticas">
-        <property name="visible">True</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="box_estadistica1">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkImage" id="imagen_titulo_estadistica">
-            <property name="visible">True</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
             <property name="can_focus">False</property>
-            <property name="pixbuf">IMG/titulo_estadisticas.JPG</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">True</property>
+            <property name="fill">False</property>
             <property name="position">0</property>
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="box2_estadisticas">
+          <object class="GtkBox" id="box_estadistica2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkImage" id="imagen_lateral_est">
+              <object class="GtkImage" id="imagen_estadisticas ">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="pixbuf">IMG/borde_est.JPG</property>
+                <property name="pixbuf">IMG/titulo_estadisticas.JPG</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -770,15 +799,14 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="box3_estadisticas">
+              <object class="GtkBox" id="box_estadistica">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkImage" id="imagen_titulo2_est">
+                  <object class="GtkImage" id="lateral1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="pixbuf">IMG/titulo2_est.JPG</property>
+                    <property name="pixbuf">IMG/borde_est.JPG</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -787,22 +815,55 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="label_estadisticas">
+                  <object class="GtkBox" id="box_estadistica3">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xpad">5</property>
-                    <property name="ypad">10</property>
-                    <property name="label" translatable="yes">RESULTADOS</property>
-                    <property name="justify">center</property>
-                    <attributes>
-                      <attribute name="font-desc" value="Ubuntu Condensed, Bold 12"/>
-                      <attribute name="foreground" value="#1c1c5c5c4545"/>
-                    </attributes>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkImage" id="titulo2_estadistica">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="pixbuf">IMG/titulo2_est.JPG</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_estadisticas">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">RESULTADOS</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Ubuntu Condensed, Bold 12"/>
+                          <attribute name="foreground" value="#1c1c5c5c4545"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage" id="lateral2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">IMG/borde_est1.JPG</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
               </object>
@@ -813,10 +874,10 @@
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="imagen_lateral2_est">
+              <object class="GtkImage" id="est_abajo">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="pixbuf">IMG/borde_est1.JPG</property>
+                <property name="pixbuf">IMG/abajo_est.jpg</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -829,18 +890,6 @@
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkImage" id="imagen_abajo_estadisticas ">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="pixbuf">IMG/abajo_est.jpg</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
           </packing>
         </child>
       </object>
@@ -889,17 +938,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkButton" id="ganaste_jugardenuevo">
-                <property name="label" translatable="yes">Jugar de nuevo</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
+              <placeholder/>
             </child>
             <child>
               <object class="GtkButton" id="ganaste_salir">
@@ -1076,18 +1115,7 @@
             <property name="can_focus">False</property>
             <property name="baseline_position">bottom</property>
             <child>
-              <object class="GtkButton" id="boton_perdiste_jugardenuevo">
-                <property name="label" translatable="yes">Jugar de nuevo</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="image_position">right</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
+              <placeholder/>
             </child>
             <child>
               <object class="GtkButton" id="boton_perdiste_salir">
