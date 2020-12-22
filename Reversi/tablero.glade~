@@ -36,7 +36,7 @@
           <object class="GtkImage" id="imagen_reglas ">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="pixbuf">IMG/IMG-Dec122020at100111.png</property>
+            <property name="pixbuf">IMG/Reglas.PNG</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -70,12 +70,17 @@
   <object class="GtkImage" id="imagen__cerrar">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">IMG/imagen_cierra.png</property>
+    <property name="icon_name">dialog-cancel</property>
   </object>
   <object class="GtkImage" id="imagen__estadisticas">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="pixbuf">IMG/boton_estadisticas.png</property>
+  </object>
+  <object class="GtkImage" id="imagen__jugar_de_nuevo">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">edit-undo</property>
   </object>
   <object class="GtkWindow" id="ventana">
     <property name="can_focus">False</property>
@@ -110,6 +115,16 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="image">imagen__estadisticas</property>
+                        <property name="use_stock">False</property>
+                        <property name="always_show_image">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="imagen_jugar_de_nuevo">
+                        <property name="label" translatable="yes">Jugar de Nuevo</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="image">imagen__jugar_de_nuevo</property>
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                       </object>

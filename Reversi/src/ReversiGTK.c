@@ -57,7 +57,17 @@ static void menu_estadisticas(GtkWidget *widget, gpointer data){
 	gtk_dialog_run(GTK_DIALOG(ventana_estadisticas));
 	gtk_widget_hide(GTK_WIDGET(ventana_estadisticas));
 }
+static void menu_jugar_de_nuevo(GtkWidget *widget, gpointer data){
+	GtkBuilder *builder;
+	builder = gtk_builder_new();
+	gtk_widget_show_all (ventana_modo);
+	gtk_widget_destroy(window);
+	//Ventana tablero
+	window = GTK_WIDGET(gtk_builder_get_object(builder, "ventana"));
 
+}
+
+//Detecta los clicks e imprime en los labels de imagen presionada
 void tablero_cb(GtkWidget *event_box, GdkEventButton *event, gpointer data){
 	fila = (GUINT_FROM_LE(event->y) / 50); //las imagenes tienen son 50x50pixeles
 	columna = (GUINT_FROM_LE(event->x) / 50);
@@ -66,14 +76,12 @@ void tablero_cb(GtkWidget *event_box, GdkEventButton *event, gpointer data){
 	gtk_label_set_text(GTK_LABEL(label_estado), temp);
 	g_free(temp);
 
-	printf("\ncolor: %d,turno: %d",color,turno);
-
 	jugar();
 
 
 }
 
-
+//Crea el tablero con las fichas iniciales
 GtkWidget *crear_tablero(){
 	int i, j;
 
@@ -156,14 +164,15 @@ static void enter_callback2( GtkWidget *widget, GtkWidget *entry ){
   rival = gtk_entry_get_text (GTK_ENTRY (entry_rival));
   printf ("rival: %s\n", rival);
 }
+//Cuando se aprieta el boton iniciar, dependiendo del modo de juego, se guardan los nombres y se visualiza el tablero
 void on_boton_iniciar_clicked(GtkButton *boton_inicio, gpointer data){
 	if(modo_juego==0){
 		if (color!=0 && turno!=0){
 			nombre = gtk_entry_get_text (GTK_ENTRY (entry_usuario));
-			printf ("nombre: %s\n", nombre);
+			//printf ("nombre: %s\n", nombre);
 
 			rival = gtk_entry_get_text (GTK_ENTRY (entry_rival));
-			printf ("rival: %s\n", rival);
+			//printf ("rival: %s\n", rival);
 
 			gtk_widget_hide(GTK_WIDGET(ventana_inicial));
 			gtk_widget_show_all(window);
@@ -192,7 +201,7 @@ void on_boton_iniciar_clicked(GtkButton *boton_inicio, gpointer data){
 		}
 	}
 
-	g_signal_connect (window, "destroy", G_CALLBACK (gtk_main_quit), NULL);
+	//g_signal_connect (window, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 
 }
 
@@ -222,6 +231,7 @@ void boton_modo_compuvscompu(GtkButton *boton_modo, gpointer data){
     GObject *menu_mostrar_ayuda; // identificador del objeto menu item ayuda
     GObject *menu_archivo_cerrar;
     GObject *menu_archivo_estadisticas;
+    GObject *menu_archivo_jugar_de_nuevo;
 
     //Para el GtkBuilder
     guint ret;
@@ -319,7 +329,8 @@ void boton_modo_compuvscompu(GtkButton *boton_modo, gpointer data){
 	g_signal_connect(menu_archivo_cerrar, "activate", G_CALLBACK (menu_cerrar), NULL);
 	menu_archivo_estadisticas = gtk_builder_get_object(builder, "imagen_estadisticas");
 	g_signal_connect(menu_archivo_estadisticas, "activate", G_CALLBACK (menu_estadisticas), NULL);
-
+	menu_archivo_jugar_de_nuevo = gtk_builder_get_object(builder, "imagen_jugar_de_nuevo");
+	g_signal_connect(menu_archivo_jugar_de_nuevo, "activate", G_CALLBACK (menu_jugar_de_nuevo), NULL);
 
 	//Box donde estara el Tablero
 	box_tablero = GTK_WIDGET(gtk_builder_get_object(builder, "box_tablero2"));

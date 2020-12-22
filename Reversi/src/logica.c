@@ -74,7 +74,7 @@ int turno_jugador(){
 			gchar *temp = g_strdup_printf("Presiono la imagen coordenada [%c,%d]", ('A'+fila-1),columna);
 			gtk_label_set_text(GTK_LABEL(label_estado), temp);
 			g_free(temp);
-			gchar *pasa_turno = g_strdup_printf("Turno de la computadora");
+			gchar *pasa_turno = g_strdup_printf("Turno de la computadora %s",rival);
 			gtk_label_set_text(GTK_LABEL(label_turno), pasa_turno);
 			g_free(pasa_turno);
 
@@ -85,8 +85,6 @@ int turno_jugador(){
 			gtk_label_set_text(GTK_LABEL(label_estado), temp);
 			g_free(temp);
 
-			//fila = (GUINT_FROM_LE(eventbox->y) / 50); //las imagenes tienen son 50x50pixeles
-			//columna = (GUINT_FROM_LE(eventbox->x) / 50);
 			return FALSE;
 		}
 

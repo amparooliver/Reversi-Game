@@ -48,27 +48,27 @@ struct statistics{
 };
 
 //FUNCIONES
-void inicializar_tablero();
-void ficha_tipo (int color);
-void turno_orden(int turno);
-int juego_terminado();
-int turno_computadora();
-int turno_jugador();
+void inicializar_tablero(); //Inicializa el tablero
+void ficha_tipo (int color);//Determina dependiendo de la ficha si es Blanco o Negro
+void turno_orden(int turno); //Imprime en consola el orden
+int juego_terminado(); //Verifica si los jugadores tienen jugadas posibles y si no hay mas casillas vacias
+int turno_computadora();//Realiza la logica y jugada de la computadora
+int turno_jugador();//Ejecuta el orden de las funciones que verifican la jugada e insertan
 void insertar_ficha(int f, int c, int col); //Inserta la ficha seleccionada
 int verifica_validez(guint i,guint j, int col); //Verifica y remplaza los ENEMY del jugador
 void verifica_validez1(guint i,guint j, int col); //Reemplaza los ENEMY encerrados de la compu en el tablero_C
-int jugadas_posibles(int i,int j, int col);
+int jugadas_posibles(int i,int j, int col); //Verifica que el que tiene el turno tiene jugada posible
 void inteligencia_compu(int i,int j, int col); //Obtiene las coordenadas con mayor posibilidad de encierro
 int pierde_turno(int col);// Verifica si (Usuario/Compu) pierde el turno o no
 void puntos(int col); //Contador de fichas en el tablero
 void remplaza_imagenes(int i, int j, int col); //Actualiza las imagenes del tablero GTK
-void jugar();
+void jugar(); //Funcion que ejecuta en orden el programa
 int impresion_estadisticas(); //Lee el txt y crea el struct statistics
 void ordenar(int nroPalabras, struct statistics *ptr); //Ordena el struct statistics en Partidas Ganadas (De mayor a menor)
 void impresion_estadisticas_enGTK(struct statistics *ptr,int nroPalabras); //Imprime en ventana GTK los top 10 jugadores
 int actualizacion_estadisticas(); //Actualiza el archivo txt
-int compu_vs_compu();
+int compu_vs_compu(); //Funcion que lee coordenadas de un archivo y realiza una jugada creando su archivo
 int conversion_columna(char aux);
 int conversion_fila(char aux);
-void secuencia_juego();
+void secuencia_juego();//Secuencia del juego compu vs compu
 int empieza_computadora(int f, int c);
