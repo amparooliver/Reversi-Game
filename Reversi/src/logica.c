@@ -493,11 +493,11 @@ void puntos(int col){
 
 	if(blancas>negras){
 		if (col==1){
-			printf("FELICIDADES GANASTE \n");
+			//Gana el usuario(humano vs compu) o computadora local(compu vs compu)
 			gano=1;
+
 			gtk_widget_hide(GTK_WIDGET(window));
 			gtk_widget_show(ventana_ganaste1);
-
 
 			gchar *ganador1 = g_strdup_printf("JOJOJO! FELICIDADES %s!\n SANTA: %d puntos\n RENO: %d puntos", nombre, blancas, negras);
 			gtk_label_set_text(GTK_LABEL(label_resultados1), ganador1);
@@ -507,35 +507,37 @@ void puntos(int col){
 			g_signal_connect (ventana_ganaste1, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 		}
 		else{
-			printf("COMPUTADORA GANA \n");
+			//Gana la computadora (humano vs compu) o computadora externa(compu vs compu)
 			gano=0;
+
 			gtk_widget_hide(GTK_WIDGET(window));
 			gtk_widget_show(GTK_WIDGET(ventana_perdiste));
-
 
 			gchar *perdedor1 = g_strdup_printf("SERA LA PROXIMA :( %s!\n SANTA: %d puntos\n RENO: %d puntos", nombre, blancas, negras);
 			gtk_label_set_text(GTK_LABEL(label_resultados2), perdedor1);
 			g_free(perdedor1);
+
 			actualizacion_estadisticas();
 			g_signal_connect (ventana_perdiste, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 		}
 	}
 	else if(negras>blancas){
 		if (col==1){
-			printf("COMPUTADORA GANA \n");
+			//Gana la computadora (humano vs compu) o computadora externa(compu vs compu)
 			gano=0;
+
 			gtk_widget_hide(GTK_WIDGET(window));
 			gtk_widget_show(GTK_WIDGET(ventana_perdiste));
-
 
 			gchar *perdedor1 = g_strdup_printf("SERA LA PROXIMA %s!\n SANTA: %d puntos\n RENO: %d puntos", nombre, blancas, negras);
 			gtk_label_set_text(GTK_LABEL(label_resultados2), perdedor1);
 			g_free(perdedor1);
 
+			actualizacion_estadisticas();
 			g_signal_connect (ventana_perdiste, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 		}
 		else{
-			printf("FELICIDADES GANASTE \n");
+			//Gana el usuario(humano vs compu) o computadora local(compu vs compu)
 			gano=1;
 
 			gtk_widget_hide(GTK_WIDGET(window));
@@ -546,22 +548,26 @@ void puntos(int col){
 			gtk_label_set_text(GTK_LABEL(label_resultados1), ganador1);
 			g_free(ganador1);
 
+			actualizacion_estadisticas();
 			g_signal_connect (ventana_ganaste1, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 		}
 	}
 	if(blancas==negras){
+		//Empataron
+		gano=2;
+
 		gtk_widget_hide(GTK_WIDGET(window));
 		gtk_widget_show(GTK_WIDGET(ventana_empataron));
 
-
-		gano=2;
 		gchar *empataron = g_strdup_printf("QUE LOCURA %s!\n SANTA: %d puntos\n RENO: %d puntos", nombre, blancas, negras);
 		gtk_label_set_text(GTK_LABEL(label_resultados3), empataron);
 		g_free(empataron);
+
+		actualizacion_estadisticas();
 		g_signal_connect (ventana_empataron, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 	}
 
-	actualizacion_estadisticas();
+
 
 }
 

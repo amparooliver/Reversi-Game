@@ -11,7 +11,7 @@
 int compu_vs_compu(){
 
 	  FILE *infile;
-	  char *inname = "./src/gonzalo.txt";
+	  char *inname = "./src/jugador_externo.txt";
 	  char coordenada[100];
 	  char line[100];
 	  char f,c;
@@ -23,48 +23,55 @@ int compu_vs_compu(){
 		  printf("\nESPERANDO AL ARCHIVO");
 
 	  }while (!infile);
+
 	  while(fgets(line, sizeof(line), infile) != NULL){
 		  printf("\nENTRA AL WHILE");
-		  //almacenamos la linea
+		  //Almacenamos la linea
 		  sscanf(line, "%s",coordenada);
 	  }
 	 rewind(infile);
 	 c= getc(infile);
 	 f= getc(infile);
-	  //prueba en consola de lo que guarda
+
+	  //Prueba en consola de lo que guarda
 	  printf("COORDENADA %s\n",coordenada);
 	  fclose(infile);
 
 	  if((strcmp("PASO",coordenada))==0){
-		  printf("\nEntra en pasar turno.");
-		  int del = remove("./src/gonzalo.txt");
-		  if (!del)
-			  printf("\nThe file is Deleted successfully");
-		  else
-		      printf("\nthe file is not Deleted");
-		  secuencia_juego();
+
+		  int del = remove("./src/jugador_externo.txt");
+		  if (!del){
+			  printf("\nSe borro el archivo exitosamente.");
+			  secuencia_juego();
+		  }
+		  else{
+			  printf("\nNo se borro el archivo");
+		  }
 	  }else{
-		  printf("\nIngreso coordenadas");
-		  printf("\nfila: %c",f);
+		  //Convertimos de char a su equivalente
 		  fila=conversion_fila(f);
 		  columna=conversion_columna(c);
-		  printf("\nFILA: %d COLUMNA: %d",fila,columna);
+
 		  verifica_validez1(fila,columna,computadora);
 		  insertar_ficha(fila,columna,computadora);
 		  remplaza_imagenes(fila,columna,computadora);
+
 		  gchar *temp = g_strdup_printf("Presiono la imagen coordenada [%c,%d]", ('A'+fila-1),columna);
 		  gtk_label_set_text(GTK_LABEL(label_estado), temp);
 		  g_free(temp);
 		  gchar *pasa_turno = g_strdup_printf("Turno de la computadora LOCAL");
 		  gtk_label_set_text(GTK_LABEL(label_turno), pasa_turno);
 		  g_free(pasa_turno);
-		  printf("\nINSERTA SUS FICHAS");
-		  int del = remove("./src/gonzalo.txt");
-		  if (!del)
-			  printf("\nThe file is Deleted successfully");
-		  else
-		      printf("\nthe file is not Deleted");
-		  secuencia_juego();
+
+		  //Eliminamos el archivo
+		  int del = remove("./src/jugador_externo.txt");
+		  if (!del){
+			  printf("\nSe borro el archivo exitosamente.");
+			  secuencia_juego();
+		  }
+		  else{
+			  printf("\nNo se borro el archivo");
+		  }
 
 	  }
 
@@ -115,8 +122,8 @@ int conversion_fila(char aux){
 }
 void secuencia_juego(){
 	if(juego_terminado()==FALSE){
-		g_timeout_add(1500,turno_computadora,NULL);
-		compu_vs_compu();
+		g_timeout_add(1000,turno_computadora,NULL);
+		g_timeout_add(1500,compu_vs_compu,NULL);
 
 	}
 	if(juego_terminado()==TRUE){
@@ -125,7 +132,7 @@ void secuencia_juego(){
 }
 int empieza_computadora(int f, int c){
 	  FILE *outfile;
-	  char *inRival= "./src/gonzalo.txt";
+	  char *inRival= "./src/amparo.txt";
 	  char aux[4]="PASO";
 	  char columna;
 

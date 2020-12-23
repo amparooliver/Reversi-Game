@@ -38,7 +38,7 @@ void ordenar(int nroJugadores, struct statistics *ptr){
     }
 
 }
-//Le estadisticas.txt y crea la estructura, seguidamente llama a la funcion donde ordena
+//Lee estadisticas.txt y crea la estructura, seguidamente llama a la funcion donde ordena
 int impresion_estadisticas(){
 
 	  char line[100];
@@ -82,7 +82,9 @@ int impresion_estadisticas(){
 		}
 
 		printf("\n");
+
 		ordenar(nroJugadores,ptr);
+
 		//Impresion ordenada en consola
 		for (i = 0; i < nroJugadores; ++i){
 	    	printf("%s\t%d\t%d\t%d\n", (ptr + i)->nombre_estadisticas,(ptr + i)->parJugadas,((ptr + i)->parGanadas),(ptr + i)->parPerdidas);
@@ -212,7 +214,7 @@ int actualizacion_estadisticas(){
 	// Abrimos el archivo para leer
 	infile = fopen(inname, "r");
 	if (!infile) {
-		printf("Couldn't open %s for reading and writing\n",inname);
+		printf("Couldn't open %s for reading\n",inname);
 		return 0;
 	}
 
@@ -237,7 +239,7 @@ int actualizacion_estadisticas(){
 
 	fclose(infile);
 
-	//Abrimos el archivo para escribir/leer
+	//Abrimos el archivo para leer y escribir
 	infile = fopen(inname, "w+");
 	if (!infile) {
 		printf("Couldn't open %s for reading and writing\n",inname);
@@ -246,27 +248,27 @@ int actualizacion_estadisticas(){
 
 	// Recorre la estructura
 	for(i=0; i<nroJugadores-1; i++) {
-		//BUSCA AL USUARIO EN EL ARCHIVO
+		//BUSCA A LOS JUGADORES EN EL ARCHIVO
 		if(strcmp(((ptr+i)->nombre_estadisticas),nombre)==0){
 			existeJugador=1;
 			((ptr + i)->parJugadas)++; // Encuentra el nombre e incrementa Partidas Jugadas
 
-			if(gano==1){ // Gana el USUARIO, incrementa Partidas Ganadas
+			if(gano==1){ // Gana el USUARIO(humano vs compu) o Gana la COMPU LOCAL(compu vs compu), incrementa Partidas Ganadas
 				((ptr + i)->parGanadas)++;
-			}else if(gano==0){// Gana la COMPUTADORA, incrementa Partidas Perdidas
+			}else if(gano==0){// Gana la COMPUTADORA(humano vs compu) o Gana la COMPU EXTERNA(compu vs compu), incrementa Partidas Perdidas
 				((ptr + i)->parPerdidas)++;
 			}else if(gano==2){ // Empataron
-				   //no aumenta nada por ahora
+				   //no aumenta nada
 			}
 
 		}else if(strcmp(((ptr+i)->nombre_estadisticas),rival)==0){
 			existeRival=1;
 			((ptr + i)->parJugadas)++;
 
-			if(gano==1){ // Gana el USUARIO, incrementa Partidas Perdidas
+			if(gano==1){ // Gana el USUARIO(humano vs compu) o Gana la COMPU LOCAL(compu vs compu), incrementa Partidas Perdidas
 				((ptr + i)->parPerdidas)++;
 
-			}else if(gano==0){// Gana la COMPUTADORA, incrementa Partidas Ganadas
+			}else if(gano==0){// Gana la COMPUTADORA(humano vs compu) o Gana la COMPU EXTERNA(compu vs compu) incrementa Partidas Ganadas
 				((ptr + i)->parGanadas)++;
 			}else if(gano==2){
 				   // Empate

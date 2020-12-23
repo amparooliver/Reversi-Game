@@ -160,6 +160,7 @@ static void enter_callback2( GtkWidget *widget, GtkWidget *entry ){
 }
 //Cuando se aprieta el boton iniciar, dependiendo del modo de juego, se guardan los nombres y se visualiza el tablero
 void on_boton_iniciar_clicked(GtkButton *boton_inicio, gpointer data){
+	//HUMANO VS COMPUTADORA
 	if(modo_juego==0){
 		if (color!=0 && turno!=0){
 			nombre = gtk_entry_get_text (GTK_ENTRY (entry_usuario));
@@ -176,13 +177,13 @@ void on_boton_iniciar_clicked(GtkButton *boton_inicio, gpointer data){
 			}
 		}
 	}
+	//COMPUTADORA VS COMPUTADORA
 	else if(modo_juego==1){
 		if (color!=0 && turno!=0){
-			nombre = gtk_entry_get_text (GTK_ENTRY (entry_usuario));
-			//printf ("Nombre de la compu local: %s\n", nombre);
 
+			//Asociamos los nombres a sus variables
+			nombre = gtk_entry_get_text (GTK_ENTRY (entry_usuario));
 			rival = gtk_entry_get_text (GTK_ENTRY (entry_rival));
-			//printf ("Nombre de la compu rival: %s\n", rival);
 
 			gtk_widget_hide(GTK_WIDGET(ventana_inicial));
 			gtk_widget_show_all(window);
