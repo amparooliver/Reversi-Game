@@ -20,7 +20,7 @@ int compu_vs_compu(){
 	  //ABRIMOS EL ARCHIVO
 	  do{
 		  infile = fopen(inname, "r");
-		  printf("\nEsPERANDO AL ARCHIVO");
+		  printf("\nESPERANDO AL ARCHIVO");
 
 	  }while (!infile);
 	  while(fgets(line, sizeof(line), infile) != NULL){
@@ -58,7 +58,7 @@ int compu_vs_compu(){
 		  gchar *pasa_turno = g_strdup_printf("Turno de la computadora LOCAL");
 		  gtk_label_set_text(GTK_LABEL(label_turno), pasa_turno);
 		  g_free(pasa_turno);
-		  printf("\niNSERTA SUS FICHAS");
+		  printf("\nINSERTA SUS FICHAS");
 		  int del = remove("./src/gonzalo.txt");
 		  if (!del)
 			  printf("\nThe file is Deleted successfully");
@@ -114,22 +114,18 @@ int conversion_fila(char aux){
 	}
 }
 void secuencia_juego(){
-	printf("\nENTRA EN SECUENCIA DE JUEGO");
 	if(juego_terminado()==FALSE){
-		printf("\njuego terminado false de secuencia");
 		g_timeout_add(1500,turno_computadora,NULL);
-		printf("\nENTRA EN JUEGO COMPU TRUE");
-		//compu_vs_compu();
+		compu_vs_compu();
 
 	}
 	if(juego_terminado()==TRUE){
 		puntos(jugador);
 	}
-	printf("sale de la funcion jugar");
 }
 int empieza_computadora(int f, int c){
 	  FILE *outfile;
-	  char *inRival= "./src/amparo.txt";
+	  char *inRival= "./src/gonzalo.txt";
 	  char aux[4]="PASO";
 	  char columna;
 

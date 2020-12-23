@@ -58,49 +58,8 @@ static void menu_estadisticas(GtkWidget *widget, gpointer data){
 	gtk_widget_hide(GTK_WIDGET(ventana_estadisticas));
 }
 static void menu_jugar_de_nuevo(GtkWidget *widget, gpointer data){
-	int i,j;
-	GtkWidget *auxiliar;
-	color=0;
-	turno=0;
-
 	gtk_widget_hide(GTK_WIDGET(window));
-	inicializar_tablero();
-
-	for (i = 1; i < MAX_FILA; i++) {
-			for (j = 1; j < MAX_COLUMNA; j++) {
-
-					gtk_image_set_from_file(tablero_imagenes[i][j],imagenes[0]);
-					gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(tablero_imagenes[i][j]), j, i, 1, 1);
-
-			}
-		}
-
-		//Fichas Iniciales
-		gtk_image_set_from_file(tablero_imagenes[4][4], "./IMG/santa.jpg");
-		gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(tablero_imagenes[4][4]), 4, 4, 1, 1);
-		gtk_image_set_from_file(tablero_imagenes[5][5], "./IMG/santa.jpg");
-		gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(tablero_imagenes[5][5]), 5, 5, 1, 1);
-
-		gtk_image_set_from_file(tablero_imagenes[5][4], "./IMG/reno.jpg");
-		gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(tablero_imagenes[5][4]), 4, 5, 1, 1);
-		gtk_image_set_from_file(tablero_imagenes[4][5], "./IMG/reno.jpg");
-		gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(tablero_imagenes[4][5]), 5, 4, 1, 1);
-
-		for (i = 0; i < MAX_FILA; i++) {
-			auxiliar = gtk_image_new_from_file(imagenes_letras[i]);
-			gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(auxiliar), i, 0, 1, 1);
-		}
-		for (j = 0; j < MAX_COLUMNA; j++) {
-			auxiliar = gtk_image_new_from_file(imagenes_nros[j]);
-			gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(auxiliar), 0, j+1, 1, 1);
-		}
-	gchar *temp = g_strdup_printf("COORDENADAS");
-	gtk_label_set_text(GTK_LABEL(label_estado), temp);
-	g_free(temp);
-	gtk_widget_show_all (ventana_modo);
-
-
-
+	main();
 }
 
 //Detecta los clicks e imprime en los labels de imagen presionada
@@ -213,14 +172,7 @@ void on_boton_iniciar_clicked(GtkButton *boton_inicio, gpointer data){
 			gtk_widget_show_all(window);
 
 			if(turno==2){
-				gchar *turno_de = g_strdup_printf("Turno de: %s", rival);
-				gtk_label_set_text(GTK_LABEL(label_turno), turno_de);
-				g_free(turno_de);
 				g_timeout_add(1500,turno_computadora,NULL);
-			}else if(turno==1){
-				gchar *turno_de = g_strdup_printf("Turno de: %s", nombre);
-				gtk_label_set_text(GTK_LABEL(label_turno), turno_de);
-				g_free(turno_de);
 			}
 		}
 	}
@@ -236,15 +188,9 @@ void on_boton_iniciar_clicked(GtkButton *boton_inicio, gpointer data){
 			gtk_widget_show_all(window);
 
 			if(turno==2){
-				gchar *turno_de = g_strdup_printf("Turno de: %s", rival);
-				gtk_label_set_text(GTK_LABEL(label_turno), turno_de);
-				g_free(turno_de);
 				compu_vs_compu();
 
 			}else if(turno==1){
-				gchar *turno_de = g_strdup_printf("Turno de: %s", nombre);
-				gtk_label_set_text(GTK_LABEL(label_turno), turno_de);
-				g_free(turno_de);
 				secuencia_juego();
 			}
 		}
@@ -317,8 +263,8 @@ void boton_modo_compuvscompu(GtkButton *boton_modo, gpointer data){
 	//Ventana modo
 	ventana_modo= GTK_WIDGET(gtk_builder_get_object(builder, "ventana_modo"));
 
+	//Ventana estadisticas
 	ventana_estadisticas= gtk_builder_get_object(builder, "ventana_estadisticas");
-
 
 	//Botones
 	boton_santa = GTK_RADIO_BUTTON(gtk_builder_get_object(builder, "boton_santa"));
@@ -330,7 +276,6 @@ void boton_modo_compuvscompu(GtkButton *boton_modo, gpointer data){
 	boton_inicio= GTK_BUTTON(gtk_builder_get_object(builder, "boton_iniciar"));
 	boton_humanovscompu= GTK_BUTTON(gtk_builder_get_object(builder, "boton_compuvshum"));
 	boton_compuvscompu= GTK_BUTTON(gtk_builder_get_object(builder, "boton_compuvscompu"));
-
 	boton_salir_ganaste=GTK_BUTTON(gtk_builder_get_object(builder, "ganaste_salir"));
 	boton_salir_perdiste=GTK_BUTTON(gtk_builder_get_object(builder, "boton_perdiste_salir"));
 
@@ -346,9 +291,7 @@ void boton_modo_compuvscompu(GtkButton *boton_modo, gpointer data){
 	entry_usuario = GTK_WIDGET(gtk_builder_get_object(builder, "entry_nombre"));
 	entry_rival = GTK_WIDGET(gtk_builder_get_object(builder, "entry_nombre_rival"));
 
-	//señales de los botones
-
-
+	//Señales de los botones
 	g_signal_connect(G_OBJECT(boton_santa), "clicked", G_CALLBACK(boton_santa_pressed), NULL);
 	g_signal_connect(G_OBJECT(boton_reno), "clicked", G_CALLBACK(boton_reno_pressed), NULL);
 	g_signal_connect(G_OBJECT(boton_aleatorio_ficha), "clicked", G_CALLBACK(boton_aleatorio_ficha_pressed), NULL);
@@ -365,11 +308,12 @@ void boton_modo_compuvscompu(GtkButton *boton_modo, gpointer data){
 
 
 	/* Conectamos las señales a los callbacks correspondientes */
-	//cuadros de diálogo
+
+	//Cuadros de diálogo
 	dialogAyuda = gtk_builder_get_object(builder, "ayuda_reversi");// leemos la ventana de diálogo de ayuda para el juego
 	dialogAcerca = gtk_builder_get_object(builder, "acerca_reversi");
-	//dialogEstadisticas = gtk_builder_get_object(builder, "ventana_estadisticas");// leemos la ventana de diálogo de ayuda para el juego
-	// opciones de menú
+
+	//Opciones de menú en ventana tablero "window"
 	menu_mostrar_ayuda = gtk_builder_get_object(builder, "imagen_ayuda");
 	g_signal_connect(menu_mostrar_ayuda, "activate", G_CALLBACK (mostrar_ayuda), NULL);
 	menu_mostrar_acerca = gtk_builder_get_object(builder, "imagen_acerca");
@@ -401,7 +345,6 @@ void boton_modo_compuvscompu(GtkButton *boton_modo, gpointer data){
 
     /* make sure that everything, window and label, are visible */
     gtk_widget_show_all (ventana_modo);
-
 
     /* start the main loop, and let it rest there until the application is closed */
     gtk_main ();
