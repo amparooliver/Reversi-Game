@@ -58,12 +58,48 @@ static void menu_estadisticas(GtkWidget *widget, gpointer data){
 	gtk_widget_hide(GTK_WIDGET(ventana_estadisticas));
 }
 static void menu_jugar_de_nuevo(GtkWidget *widget, gpointer data){
-	GtkBuilder *builder;
-	builder = gtk_builder_new();
+	int i,j;
+	GtkWidget *auxiliar;
+	color=0;
+	turno=0;
+
+	gtk_widget_hide(GTK_WIDGET(window));
+	inicializar_tablero();
+
+	for (i = 1; i < MAX_FILA; i++) {
+			for (j = 1; j < MAX_COLUMNA; j++) {
+
+					gtk_image_set_from_file(tablero_imagenes[i][j],imagenes[0]);
+					gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(tablero_imagenes[i][j]), j, i, 1, 1);
+
+			}
+		}
+
+		//Fichas Iniciales
+		gtk_image_set_from_file(tablero_imagenes[4][4], "./IMG/santa.jpg");
+		gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(tablero_imagenes[4][4]), 4, 4, 1, 1);
+		gtk_image_set_from_file(tablero_imagenes[5][5], "./IMG/santa.jpg");
+		gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(tablero_imagenes[5][5]), 5, 5, 1, 1);
+
+		gtk_image_set_from_file(tablero_imagenes[5][4], "./IMG/reno.jpg");
+		gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(tablero_imagenes[5][4]), 4, 5, 1, 1);
+		gtk_image_set_from_file(tablero_imagenes[4][5], "./IMG/reno.jpg");
+		gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(tablero_imagenes[4][5]), 5, 4, 1, 1);
+
+		for (i = 0; i < MAX_FILA; i++) {
+			auxiliar = gtk_image_new_from_file(imagenes_letras[i]);
+			gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(auxiliar), i, 0, 1, 1);
+		}
+		for (j = 0; j < MAX_COLUMNA; j++) {
+			auxiliar = gtk_image_new_from_file(imagenes_nros[j]);
+			gtk_grid_attach(GTK_GRID(tablero), GTK_WIDGET(auxiliar), 0, j+1, 1, 1);
+		}
+	gchar *temp = g_strdup_printf("COORDENADAS");
+	gtk_label_set_text(GTK_LABEL(label_estado), temp);
+	g_free(temp);
 	gtk_widget_show_all (ventana_modo);
-	gtk_widget_destroy(window);
-	//Ventana tablero
-	window = GTK_WIDGET(gtk_builder_get_object(builder, "ventana"));
+
+
 
 }
 
@@ -77,7 +113,6 @@ void tablero_cb(GtkWidget *event_box, GdkEventButton *event, gpointer data){
 	g_free(temp);
 
 	jugar();
-
 
 }
 
@@ -178,30 +213,44 @@ void on_boton_iniciar_clicked(GtkButton *boton_inicio, gpointer data){
 			gtk_widget_show_all(window);
 
 			if(turno==2){
+				gchar *turno_de = g_strdup_printf("Turno de: %s", rival);
+				gtk_label_set_text(GTK_LABEL(label_turno), turno_de);
+				g_free(turno_de);
 				g_timeout_add(1500,turno_computadora,NULL);
+			}else if(turno==1){
+				gchar *turno_de = g_strdup_printf("Turno de: %s", nombre);
+				gtk_label_set_text(GTK_LABEL(label_turno), turno_de);
+				g_free(turno_de);
 			}
 		}
 	}
 	else if(modo_juego==1){
 		if (color!=0 && turno!=0){
 			nombre = gtk_entry_get_text (GTK_ENTRY (entry_usuario));
-			printf ("Nombre de la compu local: %s\n", nombre);
+			//printf ("Nombre de la compu local: %s\n", nombre);
 
 			rival = gtk_entry_get_text (GTK_ENTRY (entry_rival));
-			printf ("Nombre de la compu rival: %s\n", rival);
+			//printf ("Nombre de la compu rival: %s\n", rival);
 
 			gtk_widget_hide(GTK_WIDGET(ventana_inicial));
 			gtk_widget_show_all(window);
 
 			if(turno==2){
+				gchar *turno_de = g_strdup_printf("Turno de: %s", rival);
+				gtk_label_set_text(GTK_LABEL(label_turno), turno_de);
+				g_free(turno_de);
 				compu_vs_compu();
+
 			}else if(turno==1){
+				gchar *turno_de = g_strdup_printf("Turno de: %s", nombre);
+				gtk_label_set_text(GTK_LABEL(label_turno), turno_de);
+				g_free(turno_de);
 				secuencia_juego();
 			}
 		}
 	}
 
-	//g_signal_connect (window, "destroy", G_CALLBACK (gtk_main_quit), NULL);
+	g_signal_connect (window, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 
 }
 
