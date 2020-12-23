@@ -152,11 +152,11 @@ void boton_aleatorio_turno_pressed(GtkWidget *widget, gpointer data){
 }
 static void enter_callback( GtkWidget *widget, GtkWidget *entry ){
   nombre = gtk_entry_get_text (GTK_ENTRY (entry_usuario));
-  printf ("nombre: %s\n", nombre);
+
 }
 static void enter_callback2( GtkWidget *widget, GtkWidget *entry ){
   rival = gtk_entry_get_text (GTK_ENTRY (entry_rival));
-  printf ("rival: %s\n", rival);
+
 }
 //Cuando se aprieta el boton iniciar, dependiendo del modo de juego, se guardan los nombres y se visualiza el tablero
 void on_boton_iniciar_clicked(GtkButton *boton_inicio, gpointer data){

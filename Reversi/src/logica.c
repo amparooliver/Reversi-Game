@@ -13,14 +13,14 @@ void jugar(){
 	if(juego_terminado()==FALSE){
 		aux=turno_jugador();
 		if(aux==TRUE){
-			printf("entra en jugar compu");
+
 			g_timeout_add(1500,turno_computadora,NULL);
 		}
 	}
 	if(juego_terminado()==TRUE){
 		puntos(jugador);
 	}
-	printf("sale de la funcion jugar");
+
 
 }
 void inicializar_tablero() {
@@ -42,33 +42,33 @@ void ficha_tipo(int color){
 	if(color==1){
 		jugador= 1;
 		computadora= 2;
-		printf("\nEres Santa!\n");
+
 	}else if(color==2){
 		jugador= 2;
 		computadora=1;
-		printf("\nEres Reno!\n");
+
 	}
 }
 
 void turno_orden(int turno){
 	if(turno==1){
-		printf("\nUsted tiene el 1er turno!\n");
+
 	}else if(turno==2){
-		printf("\nLa computadora tiene el 1er turno!\n");
+
 	}
 }
 
 
 int turno_jugador(){
-	printf("\nEntra en turno jugador");
+
 	gchar *turno_de = g_strdup_printf("Turno de: %s", nombre);
 	gtk_label_set_text(GTK_LABEL(label_turno), turno_de);
 	g_free(turno_de);
 	if(pierde_turno(jugador)==FALSE){
-		printf("\nEntra en el primer if de turno jugador");
+
 
 		if (verifica_validez(fila, columna, jugador)==TRUE){
-			printf("\ninserta la ficha");
+
 			insertar_ficha(fila,columna,jugador);
 			remplaza_imagenes(fila,columna,jugador);
 			gchar *temp = g_strdup_printf("Presiono la imagen coordenada [%c,%d]", ('A'+fila-1),columna);
@@ -90,7 +90,7 @@ int turno_jugador(){
 
 
 	}else{
-		printf("\nNo hay movimiento posible. \n");
+
 		return TRUE;
 
 	}
@@ -112,8 +112,7 @@ void insertar_ficha(int f, int c, int col)
 }
 
 int verifica_validez(guint i, guint j,int col){
-	printf("\nEntra en verifica validez");
-	printf("\nFILA %d COLUMNA %d",i,j);
+
 	int k,aux=0,auxiliar=0;;
 	//Para determinar ficha del que tiene el turno y su contrincante
 	char enemy,player;
@@ -307,7 +306,7 @@ int verifica_validez(guint i, guint j,int col){
 }
 
 int juego_terminado(){
-	printf("Entra en juego terminado");
+
 	int aux1,aux2;
 	aux1=pierde_turno(1);
 	aux2=pierde_turno(2);
@@ -331,6 +330,30 @@ int pierde_turno(int col){
 	if(aux>0){
 		return FALSE;
 	}else{
+		if(col=1){
+			if (jugador==1){
+				gchar *pasa_turno = g_strdup_printf("%s pierdes el turno",nombre);
+				gtk_label_set_text(GTK_LABEL(label_turno), pasa_turno);
+				g_free(pasa_turno);
+			}
+			else if(jugador==2){
+				gchar *pasa_turno = g_strdup_printf("Tu rival %s pierde el turno",rival);
+				gtk_label_set_text(GTK_LABEL(label_turno), pasa_turno);
+				g_free(pasa_turno);
+			}
+		}
+		else{
+			if (jugador==1){
+				gchar *pasa_turno = g_strdup_printf("Tu rival %s pierde el turno",rival);
+				gtk_label_set_text(GTK_LABEL(label_turno), pasa_turno);
+				g_free(pasa_turno);
+			}
+			else if(jugador==2){
+				gchar *pasa_turno = g_strdup_printf("%s pierdes el turno",nombre);
+				gtk_label_set_text(GTK_LABEL(label_turno), pasa_turno);
+				g_free(pasa_turno);
+			}
+		}
 		return TRUE;
 	}
 }
@@ -488,7 +511,7 @@ void puntos(int col){
 			}
 		}
 	}
-	printf ("\n Puntos obtenidos: \n Blancas: %d\n Negras: %d\n", blancas, negras);
+
 
 
 	if(blancas>negras){
